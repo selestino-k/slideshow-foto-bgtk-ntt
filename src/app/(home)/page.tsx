@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react"
 import Autoplay from "embla-carousel-autoplay";
-import Fade from "embla-carousel-fade";
 import Image from "next/image";
 import {
   Carousel,
@@ -10,6 +9,8 @@ import {
 } from "@/components/ui/carousel";
 import { Calendar, MapPin } from "lucide-react";
 import "./zoom.css";
+import { Globe, ImageIcon, UserCircle } from "lucide-react";
+import MenuCard from "@/components/menu-card";
 
 
 export default function Home() {
@@ -64,12 +65,26 @@ export default function Home() {
               </CarouselContent>
 
         </Carousel>        
-        <div className="mt-10 text-center text-gray-800 dark:text-gray-200">
-          <h1 className="text-4xl font-bold mb-4">Welcome to the Photo Slideshow App</h1>
-          <p className="text-lg">
-            This application showcases a fullscreen photo slideshow using Next.js and Embla Carousel.
-          </p>
+        <div className="mt-10 w-full mx-10text-start font-geist text-gray-800 dark:text-gray-200">
+          <h1 className="text-4xl font-bold mb-4">Menu Lainnya</h1>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <MenuCard 
+          icon={ImageIcon} 
+          title="Galeri Foto" 
+          href="/galeri-foto" 
+        />
+        <MenuCard 
+          icon={Globe} 
+          title="Website BGTK NTT" 
+          href="https://bgtk-ntt.com" 
+        />
+        <MenuCard 
+          icon={UserCircle} 
+          title="Admin" 
+          href="/admin" 
+        />
+      </div>
       </main>
     </div>
   );
