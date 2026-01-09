@@ -21,8 +21,13 @@ export default function Home() {
   const carouselItems = [
     { id: 1, date:"25 November 2025", title: "Hari Guru Nasional", description: "Untuk memperingati momentum yang berharga ini, Kementerian Pendidikan Dasar dan Menengah telah memberikan berbagai apresiasi terhadap dedikasi guru. Salah satu bentuk penghargaan tersebut adalah dengan diselenggarakannya upacara bendera memperingati Hari Guru Nasional Tahun 2025..", image: "/images/foto-1.jpg", location: "Balai GTK NTT" },
     { id: 2, date:"28-31 Oktober 2024",title: "Kegiatan di Hotel Sahid T-More", description: "Pelatihan Pemanfaatan Buku Untuk Pembelajaran Literasi dan Pengelolaan Perpustakaan Sekolah bagi Guru Jenjang SD Gelombang 1", image: "/images/foto-2.jpg" , location: "Hotel Sahid T-More Kupang" },
-    { id: 3, title: "Slide 3", description: "Description for slide 3", image: "/images/foto-3.jpg" },
-    { id: 4, title: "Slide 4", description: "Description for slide 4", image: "/images/foto-4.jpg" },
+    { id: 3, date:"20-22 Desember 2024",
+      title: "Bimbingan Teknis Mendongeng bagi Pendidik PAUD", 
+      description: "Bimbingan teknis ini bertujuan untuk meningkatkan kemampuan mendongeng para pendidik PAUD agar dapat memberikan pengalaman belajar yang menyenangkan bagi anak-anak.", 
+      image: "/images/foto-3.jpg",
+      location: "Hotel Neo El Tari Kupang"
+    },
+    { id: 4, title: "Rapat Pembentukan Tim Zona Integritas", description: "Description for slide 4", image: "/images/foto-4.jpg" },
     { id: 5, title: "Slide 5", description: "Description for slide 5", image: "/images/foto-5.jpg" },
   ];
 
