@@ -3,6 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+
 :root {
     --font-inter: var(--font-inter);
   --font-geist: var(--font-geist-sans);

@@ -1,35 +1,33 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 
-import "@/src/app/globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Slideshow Foto BGTK NTT",
-  description: "Aplikasi slideshow foto untuk Kepala BGTK NTT",
+  title: "Slideshow Foto Kepala BGTK Provinsi NTT",
+  keywords: ["Balai GTK NTT", "Balai GTK Provinsi NTT", "BGTK NTT", "Balai Guru dan Tenaga Kependidikan NTT"],
+  description: "Balai Guru dan Tenaga Kependidikan Provinsi Nusa Tenggara Timur",
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // Add custom properties as needed
+  // minimumScale: 1,
+  // maximumScale: 1,
+  // viewportFit: 'cover', 
+};
+export default async function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <main className="gap-3 w-full scroll-smooth">
+      <div className="flex w-full min-h-screen items-center justify-center">
         {children}
-      </body>
-    </html>
+      </div>
+    </main>
+
   );
 }

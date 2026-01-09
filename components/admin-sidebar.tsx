@@ -53,7 +53,7 @@ export async function AdminAppSidebar() {
             <SidebarHeader className="bg-primary dark:bg-gray-950">
                 <div className="pl-2 py-2">
                 <Link href="/" className="flex items-center gap-2" prefetch={false}>
-                    <Image src="/logo/logo-admin-bgtk-ntt.png" alt="Balai GTK Logo" width={250} height={48}/>
+                    <Image src="/images/logo/logo-admin-bgtk-ntt.png" alt="Balai GTK Logo" width={250} height={48}/>
                     
                 </Link>
                 </div>

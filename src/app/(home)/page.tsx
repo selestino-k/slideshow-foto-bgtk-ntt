@@ -65,10 +65,10 @@ export default function Home() {
               </CarouselContent>
 
         </Carousel>        
-        <div className="mt-10 w-full mx-10text-start font-geist text-gray-800 dark:text-gray-200">
+        <div className="mt-10 w-full mx-10 pl-10 text-start font-geist text-primary dark:text-white-700">
           <h1 className="text-4xl font-bold mb-4">Menu Lainnya</h1>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="flex space-y-12 md:space-y-0 md:flex-row md:space-x-6 mt-4 mb-10">
         <MenuCard 
           icon={ImageIcon} 
           title="Galeri Foto" 

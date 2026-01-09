@@ -3,11 +3,11 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/dark-switch";
 import { Toaster } from "sonner";
-import { AdminAppSidebar } from "../../../components/admin-sidebar";
+import { AdminAppSidebar } from "@/components/admin-sidebar";
 
 
 export const metadata: Metadata = {
-  title: "Panel Admin SLideshow Foto BGTK NTT",
+  title: "Panel Admin Slideshow Foto BGTK NTT",
   description: "Panel Admin untuk mengelola slideshow foto kepala BGTK NTT",
 };
 
