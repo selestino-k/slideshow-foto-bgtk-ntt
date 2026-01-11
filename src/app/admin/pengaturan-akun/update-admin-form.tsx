@@ -21,6 +21,7 @@ import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
 import { CircleLoader } from "@/components/circle-loader"
 import { User } from "next-auth"
+import { Eye, EyeOff } from "lucide-react"
 
 // Form validation schema
 const userFormSchema = z.object({
@@ -38,6 +39,7 @@ interface UpdateAdminFormProps {
 
 export default function UpdateAdminForm({ user }: UpdateAdminFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
   
@@ -158,11 +160,29 @@ export default function UpdateAdminForm({ user }: UpdateAdminFormProps) {
                     <FormItem>
                       <FormLabel>Password Baru (kosongkan jika tidak ingin mengubah)</FormLabel>
                       <FormControl>
-                        <Input 
-                          type="password" 
-                          placeholder="Kosongkan jika tidak ingin mengubah" 
-                          {...field} 
-                        />
+                        <div className="relative">
+                          <Input 
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Kosongkan jika tidak ingin mengubah" 
+                            {...field} 
+                            disabled={isSubmitting}
+                            className="pr-10"
+                          />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                            onClick={() => setShowPassword(!showPassword)}
+                            disabled={isSubmitting}
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-4 w-4 text-muted-foreground" />
+                            ) : (
+                              <Eye className="h-4 w-4 text-muted-foreground" />
+                            )}
+                          </Button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

@@ -38,7 +38,7 @@ export default async function SignInPage() {
                             </Link>
                         </div>
                         <h1 className="text-3xl font-geist font-bold text-primary mb-1">Selamat Datang</h1>
-                        <h2 className="text-md">Panel Admin CMS <br />BGTK Provinsi NTT</h2>
+                        <h2 className="text-md">Panel Admin Aplikasi Web Slideshow Foto <br />BGTK Provinsi NTT</h2>
                     </div>
 
                     <LoginForm />

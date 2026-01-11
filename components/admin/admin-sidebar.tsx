@@ -71,7 +71,7 @@ export async function AdminAppSidebar() {
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <a href={item.url} className="flex items-center gap-3 px-3 py-2 rounded-md
-                                             hover:bg-primary-70 h-12 pl-8 dark:hover:bg-gray-800 transition-colors">
+                                             hover:bg-primary-70 h-12 pl-8 dark:hover:bg-primary-700 transition-colors">
                                             <item.icon className="h-8 w-8" />
                                             <span>{item.title}</span>
                                         </a>
