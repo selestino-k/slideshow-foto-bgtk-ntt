@@ -59,6 +59,10 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
         <Carousel
             plugins={Plugin.current}
             className="w-full max-w-screen h-screen bg-black"
+            opts={{
+                loop: true,
+                dragFree: false,
+            }}
             setApi={(carouselApi) => {
                 setApi(carouselApi)
                 autoplayRef.current = carouselApi?.plugins().autoplay
@@ -75,8 +79,8 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
                                 className="object-cover carousel-item-zoom"
                                 priority={photo.id === photos[0]?.id}
                             />
-                            <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 pb-10">
-                                <div className="flex items-center mb-4">
+                            <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 pb-15">
+                                <div className="flex items-center mb-2">
                                     <h4 className="text-gray-200 text-xl mt-2 mb-2 mr-6 ">
                                         <Calendar className="inline-block mr-2 mb-1" />
                                         {formatDate(photo.timelineDate)}
@@ -89,11 +93,11 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
                                     )}
                                 </div>
 
-                                <h3 className="text-white text-6xl font-bold w-full">
+                                <h3 className="text-white text-4xl font-bold w-full">
                                     {photo.photoName}
                                 </h3>
                                 {photo.description && (
-                                    <p className="text-gray-200 text-xl mt-2 mb-6 w-full">
+                                    <p className="text-gray-200 text-xl mt-4 mb-6 w-full">
                                         {photo.description}
                                     </p>
                                 )}
@@ -106,7 +110,6 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
 
             {/* Navigation Arrows and Pagination Dots Container */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4">
-                <CarouselPrevious className="relative bg-white/20 hover:bg-white/30 text-white border-white/50 left-0 translate-y-0" />
                 
                 {/* Pagination Dots */}
                 <div className="flex gap-2">

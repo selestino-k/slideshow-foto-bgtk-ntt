@@ -179,6 +179,9 @@ export function ImageUploader({
             <p className="text-xs text-gray-500">
               Maksimal {maxSizeMB}MB - Format: JPG, PNG, GIF, WebP
             </p>
+            <p className="text-xs text-gray-500">
+              Foto wajib dalam bentuk landscape (horizontal)
+            </p>
           </label>
         </div>
       ) : (

@@ -26,7 +26,7 @@ async function getDashboardData() {
     console.log('Sample timelineDate values:', photos.slice(0, 3).map(p => p.timelineDate));
 
     // Calculate chart data - showing past 3 months, current month, and next 2 months
-    const months: { month: string; desktop: number }[] = [];
+    const months: { month: string; count: number }[] = [];
     const currentDate = new Date();
     
     // Start from 3 months ago and go to 2 months in the future
@@ -57,7 +57,7 @@ async function getDashboardData() {
         
         months.push({
             month: format(monthDate, "MMMM",  { locale: idLocale }),
-            desktop: photosInMonth.length,
+            count: photosInMonth.length,
         });
     }
 

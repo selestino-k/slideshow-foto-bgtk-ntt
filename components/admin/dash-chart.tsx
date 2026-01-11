@@ -19,7 +19,7 @@ import {
 export const description = "A bar chart"
 
 const chartConfig = {
-  desktop: {
+  count: {
     label: "Jumlah Foto",
     color: "var(--chart-2)",
   },
@@ -27,7 +27,7 @@ const chartConfig = {
 
 interface ChartData {
   month: string
-  desktop: number
+  count: number
 }
 
 interface DashChartProps {
@@ -63,7 +63,7 @@ export function DashChart({ initialData }: DashChartProps) {
               cursor={false}
               content={<ChartTooltipContent />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+            <Bar dataKey="count" fill="var(--color-count)" radius={8} />
           </BarChart>
         </ChartContainer>
       </CardContent>

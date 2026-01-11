@@ -60,7 +60,7 @@ export default async function Home() {
           <MenuCard
             iconName="Globe"
             title="Website BGTK NTT"
-            href="https://bgtk-ntt.com"
+            href="https://bgtkntt.kemendikdasmen.go.id/"
           />
           <MenuCard
             iconName="UserCircle"
