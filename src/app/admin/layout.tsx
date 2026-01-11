@@ -4,6 +4,10 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/dark-switch";
 import { Toaster } from "sonner";
 import { AdminAppSidebar } from "@/components/admin/admin-sidebar";
+import { SessionProviderWrapper } from "@/components/admin/session-provider-wrapper";
+import {authOptions} from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 
 export const metadata: Metadata = {
@@ -17,7 +21,13 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }>) {
 
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/sign-in');
+  }
+
   return (
+    <SessionProviderWrapper>
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
@@ -45,5 +55,6 @@ export default async function AdminLayout({
           </main>
         </SidebarProvider>
       </ThemeProvider>
+    </SessionProviderWrapper>
   );
 }

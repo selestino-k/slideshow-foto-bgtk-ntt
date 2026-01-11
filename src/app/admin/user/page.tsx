@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/ui/data-table";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 async function getUserData() {
   const users = await prisma.user.findMany({
@@ -27,7 +28,10 @@ async function getUserData() {
 export default async function UsersPage() {
   const session = await getServerSession(authOptions);
   const userData = await getUserData();
- 
+  
+  if (!session?.user?.id) {
+    redirect("/sign-in");
+  }
 
   return (
     <div className="items-stretch w-full min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">

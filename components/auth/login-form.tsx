@@ -53,12 +53,9 @@ export function LoginForm() {
       // Refresh to get updated session
       router.refresh();
       
-      // Redirect based on role
-      if (session?.user?.role === "Admin" || session?.user?.role === "Operator") {
+     
         router.push("/admin");
-      } else {
-        router.push("/");
-      }
+      
       
     } catch {
       setError("Terjadi kesalahan saat login. Silakan coba lagi.");

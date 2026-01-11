@@ -22,22 +22,14 @@ export const metadata: Metadata = {
 export default async function SignInPage() {
     return (
         <div className="relative grid w-full min-h-screen">
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/images/intro-web.png"
-                    alt="Background"
-                    fill
-                    className="object-cover opacity-95 blur-xs dark:opacity-40"
-                    priority
-                />
-            </div>
+            
             <Suspense fallback={<AuthLoading />}>
                 <main className="relative z-10 w-full max-w-md mx-auto my-auto space-y-6 p-8 rounded-xl shadow-lg bg-white/90 dark:bg-gray-900/90">
                     <div className="space-y-2 text-center">
                         <div className="pb-6 flex items-center justify-center space-x-6">
                             <Link href="/">
                                 <Image
-                                    src="/logo/logo-web-bgtk-ntt.png"
+                                    src="/images/logo/logo-web-bgtk-ntt.png"
                                     alt="Logo BGTK NTT"
                                     width={300}
                                     height={100}

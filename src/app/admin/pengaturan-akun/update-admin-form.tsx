@@ -16,21 +16,18 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
-import { updateUser } from "@/lib/user-actions"
+import { updateUser } from "@/lib/actions/user-actions"
 import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
-import { CircleLoader } from "@/components/ui/circle-loader"
+import { CircleLoader } from "@/components/circle-loader"
 import { User } from "next-auth"
 
 // Form validation schema
 const userFormSchema = z.object({
   name: z.string().min(1, { message: "Nama wajib diisi" }),
-  email: z.string().email({ message: "Email tidak valid" }),
+  email: z.email({ message: "Email tidak valid" }),
   password: z.string().optional(), // Make password optional for updates
-  role: z.enum(["USER", "ADMIN"], {
-    errorMap: () => ({ message: "Role tidak valid" }),
-  }),
-  // Add other fields as necessary
+  
 });
 
 type UpdateFormValues = z.infer<typeof userFormSchema>;
@@ -51,7 +48,6 @@ export default function UpdateAdminForm({ user }: UpdateAdminFormProps) {
       name: user.name || "",
       email: user.email || "",
       password: "",
-      role: "ADMIN",
     },
   });
   
@@ -87,7 +83,6 @@ export default function UpdateAdminForm({ user }: UpdateAdminFormProps) {
             id: updatedValues.id,
             name: updatedValues.name,
             email: updatedValues.email,
-            role: updatedValues.role,
           };
       
       await updateUser(dataToUpdate);

@@ -18,10 +18,10 @@ export async function getPhotos() {
   }
 }
 
-export async function getPhotoById(id: number) {
+export async function getPhotoById(id: string) {
   try {
     const photo = await prisma.photo.findUnique({
-      where: { id },
+      where: { id: parseInt(id) },
     });
     return photo;
   } catch (error) {
@@ -83,21 +83,26 @@ export async function createPhoto(formData: FormData) {
   }
 }
 
-export async function updatePhoto(id: number, formData: FormData) {
+export async function updatePhoto(formData: FormData) {
   try {
+    const id = formData.get('id');
     const photoName = formData.get('photoName') as string;
     const description = formData.get('description') as string;
     const timelineDate = formData.get('timelineDate') as string;
     const location = formData.get('location') as string;
     const file = formData.get('file') as File | null;
+    const externalUrl = formData.get('externalUrl') as string | null;
+    const existingImageUrl = formData.get('imageUrl') as string | null;
 
-    if (!photoName || !timelineDate) {
+    if (!id || !photoName || !timelineDate) {
       return { success: false, error: 'Missing required fields' };
     }
 
+    const photoId = parseInt(id as string);
+
     // Get existing photo
     const existingPhoto = await prisma.photo.findUnique({
-      where: { id },
+      where: { id: photoId },
     });
 
     if (!existingPhoto) {
@@ -106,22 +111,35 @@ export async function updatePhoto(id: number, formData: FormData) {
 
     let imageUrl = existingPhoto.imageUrl;
 
-    // If new file is provided, upload to S3 and delete old image
+    // Handle image update logic
     if (file && file.size > 0) {
+      // New file uploaded - upload to S3
       const uploadResult = await uploadImageToS3(file, 'slideshow');
 
       if (!uploadResult.success || !uploadResult.url) {
         return { success: false, error: uploadResult.error || 'Failed to upload image' };
       }
 
-      // Delete old image from S3
-      await deleteImageFromS3(existingPhoto.imageUrl);
+      // Delete old image from S3 if it's not an external URL
+      if (!existingPhoto.imageUrl.startsWith('http://') && !existingPhoto.imageUrl.startsWith('https://')) {
+        await deleteImageFromS3(existingPhoto.imageUrl);
+      }
+      
       imageUrl = uploadResult.url;
+    } else if (externalUrl) {
+      // Using external URL - delete old image from S3 if needed
+      if (!existingPhoto.imageUrl.startsWith('http://') && !existingPhoto.imageUrl.startsWith('https://')) {
+        await deleteImageFromS3(existingPhoto.imageUrl);
+      }
+      imageUrl = externalUrl;
+    } else if (existingImageUrl) {
+      // Keep existing image URL
+      imageUrl = existingImageUrl;
     }
 
     // Update photo record
     const photo = await prisma.photo.update({
-      where: { id },
+      where: { id: photoId },
       data: {
         photoName,
         description: description || null,
@@ -132,6 +150,7 @@ export async function updatePhoto(id: number, formData: FormData) {
     });
 
     revalidatePath('/');
+    revalidatePath('/admin/daftar-foto');
     return { success: true, photo };
   } catch (error) {
     console.error('Error updating photo:', error);

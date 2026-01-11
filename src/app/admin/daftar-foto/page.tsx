@@ -4,6 +4,10 @@ import { Plus } from "lucide-react";
 import { columns } from "./columns";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
 
 
 
@@ -24,8 +28,14 @@ async function getPhotoData() {
 
 }
 
-export default async function PostsPage() {
+export default async function DaftarFotoPage() {
     const photoData = await getPhotoData();
+     const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+       redirect("/sign-in");
+    }
+
     return (
         <div className="items-stretch w-full min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
             <main className="flex flex-col gap-3 w-full">

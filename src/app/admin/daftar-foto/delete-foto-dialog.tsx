@@ -65,11 +65,11 @@ export function DeleteFotoDialog({ id, photoName }: DeleteFotoDialogProps) {
           <Trash2 className="h-4 w-4" />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>``
+      <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hapus Postingan?</AlertDialogTitle>
+          <AlertDialogTitle>Hapus Foto?</AlertDialogTitle>
           <AlertDialogDescription>
-            Apakah Anda yakin ingin menghapus postingan <strong>&quot;{photoName}&quot;</strong>?
+            Apakah Anda yakin ingin menghapus foto <strong>&quot;{photoName}&quot;</strong>?
             Tindakan ini tidak dapat dibatalkan.
           </AlertDialogDescription>
         </AlertDialogHeader>
