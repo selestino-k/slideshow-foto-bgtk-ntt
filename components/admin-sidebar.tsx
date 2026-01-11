@@ -23,20 +23,15 @@ const items = [
         icon: ChartPie,
     },
     {
-        title: "Galeri Foto",
-        url: "/admin/galeri-foto",
-        icon: ImagePlay,
-    },
-    {
         title: "Daftar Foto",
         url: "/admin/daftar-foto",
         icon: List,
     },
     {
-        title: "Daftar Pengguna",
-        url: "/admin/users",
-        icon: User,
-    }
+        title: "Galeri Foto",
+        url: "/admin/galeri-foto",
+        icon: ImagePlay,
+    },
 ]
 
 // Sidebar component with explicit background styling
