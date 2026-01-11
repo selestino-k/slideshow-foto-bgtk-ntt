@@ -3,7 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/dark-switch";
 import { Toaster } from "sonner";
-import { AdminAppSidebar } from "@/components/admin-sidebar";
+import { AdminAppSidebar } from "@/components/admin/admin-sidebar";
 
 
 export const metadata: Metadata = {

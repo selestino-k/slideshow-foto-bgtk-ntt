@@ -3,6 +3,7 @@ import { HomeCarousel } from "./home-carousel"
 import prisma from "@/lib/prisma"
 import "./zoom.css"
 import Image from "next/image"
+import { ModeToggle } from "@/components/dark-switch"
 
 async function getCarouselPhotos() {
   try {
@@ -41,7 +42,15 @@ export default async function Home() {
 
 
       <div className="mt-10 w-full mx-10 pl-10 text-start font-geist text-primary dark:text-white-700">
-        <h1 className="text-4xl font-bold mb-4">Menu Lainnya</h1>
+        <div className="flex flex-row items-start">
+          <div className=" items-center space-x-4">
+            <h1 className="text-4xl font-bold mb-4">Menu Lainnya</h1>
+          </div>
+          <div className="items-center ml-auto px-8">
+            <ModeToggle />
+          </div>
+        </div>
+
         <div className="flex space-y-12 md:space-y-0 md:flex-row md:space-x-6 mt-4 mb-10">
           <MenuCard
             iconName="ImageIcon"

@@ -3,8 +3,8 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/dark-switch";
 
 export const metadata: Metadata = {
-  title: "SI Inventaris Lab Bioscience",
-  description: "Sistem Informasi Inventaris Lab Bioscience - UPT Laboratorium Terpadu Universitas Nusa Cendana",
+  title: "Panel Admin CMS BGTK NTT",
+  description: "Panel Admin CMS BGTK NTT",
 };
 
 export default function AuthLayout({
@@ -12,8 +12,6 @@ export default function AuthLayout({
 }:{
   children: React.ReactNode;
 }) {
-
-  
   return (
     <ThemeProvider
       attribute="class"
@@ -21,18 +19,14 @@ export default function AuthLayout({
       enableSystem
       disableTransitionOnChange
     >
-    <main className="gap-3 w-full">
-      <div className="flex justify-end p-4">
-        <ModeToggle />
-      </div>
-        <div className="flex  min-h-screen items-center justify-items-center">
-        {children}
+      <main className="relative w-full min-h-screen">
+        <div className="absolute top-4 right-4 z-20">
+          <ModeToggle />
         </div>
-  
-    </main>
+        <div className="flex min-h-screen items-center justify-center">
+          {children}
+        </div>
+      </main>
     </ThemeProvider>
-
   );
 }
-
-
