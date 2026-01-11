@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
  
   images: {
-    formats: ['image/webp'],
+    formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,7 +24,22 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'bgtkntt.kemendikdasmen.go.id',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
+        port: '',
+        pathname: '/**',
+      },
     ],
+    // Alternative: Allow all domains (less secure but more flexible)
+    // dangerouslyAllowSVG: true,
+    // unoptimized: false,
   },
   productionBrowserSourceMaps: false,
   

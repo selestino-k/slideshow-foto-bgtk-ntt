@@ -611,7 +611,8 @@ export const PhotoScalarFieldEnum = {
   timelineDate: 'timelineDate',
   imageUrl: 'imageUrl',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  location: 'location'
 } as const
 
 export type PhotoScalarFieldEnum = (typeof PhotoScalarFieldEnum)[keyof typeof PhotoScalarFieldEnum]

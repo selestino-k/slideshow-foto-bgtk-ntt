@@ -42,6 +42,7 @@ export type PhotoMinAggregateOutputType = {
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  location: string | null
 }
 
 export type PhotoMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type PhotoMaxAggregateOutputType = {
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  location: string | null
 }
 
 export type PhotoCountAggregateOutputType = {
@@ -62,6 +64,7 @@ export type PhotoCountAggregateOutputType = {
   imageUrl: number
   createdAt: number
   updatedAt: number
+  location: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type PhotoMinAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  location?: true
 }
 
 export type PhotoMaxAggregateInputType = {
@@ -92,6 +96,7 @@ export type PhotoMaxAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  location?: true
 }
 
 export type PhotoCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type PhotoCountAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  location?: true
   _all?: true
 }
 
@@ -199,6 +205,7 @@ export type PhotoGroupByOutputType = {
   imageUrl: string
   createdAt: Date
   updatedAt: Date
+  location: string | null
   _count: PhotoCountAggregateOutputType | null
   _avg: PhotoAvgAggregateOutputType | null
   _sum: PhotoSumAggregateOutputType | null
@@ -232,6 +239,7 @@ export type PhotoWhereInput = {
   imageUrl?: Prisma.StringFilter<"Photo"> | string
   createdAt?: Prisma.DateTimeFilter<"Photo"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Photo"> | Date | string
+  location?: Prisma.StringNullableFilter<"Photo"> | string | null
 }
 
 export type PhotoOrderByWithRelationInput = {
@@ -242,6 +250,7 @@ export type PhotoOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type PhotoWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +264,7 @@ export type PhotoWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringFilter<"Photo"> | string
   createdAt?: Prisma.DateTimeFilter<"Photo"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Photo"> | Date | string
+  location?: Prisma.StringNullableFilter<"Photo"> | string | null
 }, "id">
 
 export type PhotoOrderByWithAggregationInput = {
@@ -265,6 +275,7 @@ export type PhotoOrderByWithAggregationInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PhotoCountOrderByAggregateInput
   _avg?: Prisma.PhotoAvgOrderByAggregateInput
   _max?: Prisma.PhotoMaxOrderByAggregateInput
@@ -283,6 +294,7 @@ export type PhotoScalarWhereWithAggregatesInput = {
   imageUrl?: Prisma.StringWithAggregatesFilter<"Photo"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Photo"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Photo"> | Date | string
+  location?: Prisma.StringNullableWithAggregatesFilter<"Photo"> | string | null
 }
 
 export type PhotoCreateInput = {
@@ -292,6 +304,7 @@ export type PhotoCreateInput = {
   imageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
 }
 
 export type PhotoUncheckedCreateInput = {
@@ -302,6 +315,7 @@ export type PhotoUncheckedCreateInput = {
   imageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
 }
 
 export type PhotoUpdateInput = {
@@ -311,6 +325,7 @@ export type PhotoUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PhotoUncheckedUpdateInput = {
@@ -321,6 +336,7 @@ export type PhotoUncheckedUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PhotoCreateManyInput = {
@@ -331,6 +347,7 @@ export type PhotoCreateManyInput = {
   imageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
 }
 
 export type PhotoUpdateManyMutationInput = {
@@ -340,6 +357,7 @@ export type PhotoUpdateManyMutationInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PhotoUncheckedUpdateManyInput = {
@@ -350,6 +368,7 @@ export type PhotoUncheckedUpdateManyInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PhotoCountOrderByAggregateInput = {
@@ -360,6 +379,7 @@ export type PhotoCountOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type PhotoAvgOrderByAggregateInput = {
@@ -374,6 +394,7 @@ export type PhotoMaxOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type PhotoMinOrderByAggregateInput = {
@@ -384,6 +405,7 @@ export type PhotoMinOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type PhotoSumOrderByAggregateInput = {
@@ -412,6 +434,7 @@ export type PhotoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  location?: boolean
 }, ExtArgs["result"]["photo"]>
 
 export type PhotoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -422,6 +445,7 @@ export type PhotoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  location?: boolean
 }, ExtArgs["result"]["photo"]>
 
 export type PhotoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -432,6 +456,7 @@ export type PhotoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  location?: boolean
 }, ExtArgs["result"]["photo"]>
 
 export type PhotoSelectScalar = {
@@ -442,9 +467,10 @@ export type PhotoSelectScalar = {
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  location?: boolean
 }
 
-export type PhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "photoName" | "description" | "timelineDate" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["photo"]>
+export type PhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "photoName" | "description" | "timelineDate" | "imageUrl" | "createdAt" | "updatedAt" | "location", ExtArgs["result"]["photo"]>
 
 export type $PhotoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Photo"
@@ -457,6 +483,7 @@ export type $PhotoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     imageUrl: string
     createdAt: Date
     updatedAt: Date
+    location: string | null
   }, ExtArgs["result"]["photo"]>
   composites: {}
 }
@@ -887,6 +914,7 @@ export interface PhotoFieldRefs {
   readonly imageUrl: Prisma.FieldRef<"Photo", 'String'>
   readonly createdAt: Prisma.FieldRef<"Photo", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Photo", 'DateTime'>
+  readonly location: Prisma.FieldRef<"Photo", 'String'>
 }
     
 

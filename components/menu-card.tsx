@@ -3,16 +3,18 @@
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import * as Icons from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface MenuCardProps {
-  icon: LucideIcon;
+  iconName: string;
   title: string;
   href: string;
 }
 
-export default function MenuCard({ icon: Icon, title, href }: MenuCardProps) {
+export default function MenuCard({ iconName, title, href }: MenuCardProps) {
   const router = useRouter();
+  const Icon = (Icons[iconName as keyof typeof Icons] as LucideIcon) || Icons.ImageIcon;
 
   const handleClick = () => {
     if (href.startsWith('http')) {

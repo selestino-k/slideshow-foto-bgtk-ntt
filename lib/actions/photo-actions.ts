@@ -36,6 +36,7 @@ export async function createPhoto(formData: FormData) {
     const photoName = formData.get('photoName') as string;
     const description = formData.get('description') as string;
     const timelineDate = formData.get('timelineDate') as string;
+    const location = formData.get('location') as string;
     const externalUrl = formData.get('externalUrl') as string | null;
 
     if (!photoName || !timelineDate) {
@@ -66,6 +67,7 @@ export async function createPhoto(formData: FormData) {
         photoName,
         description: description || null,
         timelineDate,
+        location: location || null,
         imageUrl,
       },
     });
@@ -86,6 +88,7 @@ export async function updatePhoto(id: number, formData: FormData) {
     const photoName = formData.get('photoName') as string;
     const description = formData.get('description') as string;
     const timelineDate = formData.get('timelineDate') as string;
+    const location = formData.get('location') as string;
     const file = formData.get('file') as File | null;
 
     if (!photoName || !timelineDate) {
@@ -123,6 +126,7 @@ export async function updatePhoto(id: number, formData: FormData) {
         photoName,
         description: description || null,
         timelineDate,
+        location: location || null,
         imageUrl,
       },
     });
