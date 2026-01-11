@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft, Home } from "lucide-react";
@@ -12,15 +11,6 @@ const NotFound = () => {
     return (
         <div className="grid w-full">
             <div className="flex items-center justify-center h-screen w-full relative">
-                <div className="absolute inset-0 z-0">
-                    <Image 
-                        src="/images/intro-web.png"
-                        alt="Background"
-                        fill
-                        className="object-cover opacity-95 grayscale"
-                        priority
-                    />
-                </div>
                 <main className="relative z-10 flex flex-col gap-3 text-white items-center p-8 w-full">
                     <div className="text-center w-full">
                         <h1 className="text-4xl md:text-5xl/9 font-bold sm:tracking-tight mt-2 text-primary">

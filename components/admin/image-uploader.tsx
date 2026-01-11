@@ -34,7 +34,7 @@ export function ImageUploader({
 }: ImageUploaderProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
-  const [showUrlPreview, setShowUrlPreview] = useState(false)
+  const [showUrlPreview, setShowUrlPreview] = useState(true)
 
   const handleFileUpload = async (file: File) => {
     if (!file.type.startsWith('image/')) {
