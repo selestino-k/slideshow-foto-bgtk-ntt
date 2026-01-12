@@ -50,7 +50,7 @@ export default async function AdminLayout({
             </div>
             <div className="flex w-full min-h-screen items-center justify-items-center">
               {children}
-              <Toaster position="top-right" />
+              <Toaster position="bottom-center" />
             </div>
           </main>
         </SidebarProvider>

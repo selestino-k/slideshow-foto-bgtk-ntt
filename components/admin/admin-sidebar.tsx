@@ -36,7 +36,7 @@ const items = [
     },
     {
         title: "Pengguna",
-        url: "/admin/users",
+        url: "/admin/user",
         icon: User,
     },
 ]

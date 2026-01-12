@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FotoGallery } from "./foto-gallery";
+import {toast } from "@/hooks/use.toast";
 
 
 async function getAllPhotos() {
@@ -13,8 +14,8 @@ async function getAllPhotos() {
             },
         })
         return photos
-    } catch (error) {
-        console.error('Error fetching photos:', error)
+    } catch  {
+        toast.error("Gagal memuat foto. Silakan coba lagi.")
         return []
     }
 }

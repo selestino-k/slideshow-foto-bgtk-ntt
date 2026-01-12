@@ -3,6 +3,7 @@ import { FotoGallery } from "./foto-gallery"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ModeToggle } from "@/components/dark-switch"
+import { toast } from "@/hooks/use.toast"
 
 async function getAllPhotos() {
     try {
@@ -12,8 +13,8 @@ async function getAllPhotos() {
             },
         })
         return photos
-    } catch (error) {
-        console.error('Error fetching photos:', error)
+    } catch {
+        toast.error('Error fetching photos');
         return []
     }
 }
@@ -26,8 +27,8 @@ export default async function GaleriFotoPage() {
             {/* Header */}
             <header className=" flex sticky top-0 z-40 bg-white dark:bg-gray-900 shadow-sm">
                 <div className="container mx-auto px-4 py-4 flex items-center gap-4">
-                    <Link 
-                        href="/" 
+                    <Link
+                        href="/"
                         className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
                     >
                         <ArrowLeft className="w-5 h-5" />

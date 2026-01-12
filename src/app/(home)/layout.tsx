@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default async function HomeLayout({
     <main className="gap-3 w-full scroll-smooth">
       <div className="flex w-full min-h-screen items-center justify-center">
         {children}
+        <Toaster position="bottom-center" />
       </div>
     </main>
 

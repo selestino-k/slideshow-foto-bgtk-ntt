@@ -16,7 +16,7 @@ const NotFound = () => {
                         <h1 className="text-4xl md:text-5xl/9 font-bold sm:tracking-tight mt-2 text-primary">
                             404 - Halaman Tidak Ditemukan
                         </h1>  
-                        <h2 className="text-2xl mt-4 mb-6 text-gray-700">
+                        <h2 className="text-2xl mt-4 mb-6 text-gray-700 dark:text-gray-300">
                             Maaf, halaman yang Anda cari tidak ditemukan.
                         </h2>
                     </div>

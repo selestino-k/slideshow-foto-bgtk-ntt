@@ -43,7 +43,7 @@ export default async function UsersPage() {
         </div>
         <div className="mt-10 flex">
           <Button variant="default" size="lg" asChild>
-            <Link href="/admin/users/buat">
+            <Link href="/admin/user/tambah">
               <Plus className="mr-2 h-8 w-8" />
               Tambah Pengguna
             </Link>

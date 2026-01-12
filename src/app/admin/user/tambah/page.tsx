@@ -78,11 +78,10 @@ export default function CreateUserPage() {
 
       router.push("/admin/user")
       router.refresh()
-    } catch (error) {
-      console.error("Gagal membuat pengguna:", error)
+    } catch  {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Gagal membuat pengguna",
+        description: "Gagal membuat pengguna",
         variant: "destructive",
       })
     } finally {
