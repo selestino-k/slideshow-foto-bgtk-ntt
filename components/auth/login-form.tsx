@@ -16,6 +16,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 
+const TIMEOUT_MS = 10000; // 10 seconds timeout
+
 export function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,11 +34,18 @@ export function LoginForm() {
     const password = formData.get("password") as string;
     
     try {
-      const result = await signIn("credentials", {
+      // Add timeout promise
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), TIMEOUT_MS)
+      );
+      
+      const signInPromise = signIn("credentials", {
         email,
         password,
         redirect: false,
       });
+      
+      const result = await Promise.race([signInPromise, timeoutPromise]) as Awaited<ReturnType<typeof signIn>>;
       
       if (result?.error) {
         setError("Email atau password salah. Silakan coba lagi.");
@@ -46,19 +55,19 @@ export function LoginForm() {
 
       // Get session to check user role
       const response = await fetch('/api/auth/session');
-
       const session = await response.json();
       console.log("User session:", session);
       
       // Refresh to get updated session
       router.refresh();
+      router.push("/admin");
       
-     
-        router.push("/admin");
-      
-      
-    } catch {
-      setError("Terjadi kesalahan saat login. Silakan coba lagi.");
+    } catch (error) {
+      if (error instanceof Error && error.message === 'Timeout') {
+        setError("Koneksi timeout. Silakan coba lagi.");
+      } else {
+        setError("Terjadi kesalahan saat login. Silakan coba lagi.");
+      }
       setIsLoading(false);
     }
   }

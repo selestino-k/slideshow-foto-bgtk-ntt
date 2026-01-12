@@ -47,9 +47,16 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
+        // Use select to only fetch needed fields for better performance
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
+          },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            password: true,
           },
         });
 
@@ -88,6 +95,9 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  // Add these for better performance on Vercel
+  secret: process.env.AUTH_SECRET,
+  useSecureCookies: process.env.NODE_ENV === "production",
 };
 
 export default NextAuth(authOptions);
