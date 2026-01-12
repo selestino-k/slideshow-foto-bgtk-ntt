@@ -14,7 +14,7 @@ async function getAllPhotos() {
         })
         return photos
     } catch {
-        toast.error('Error fetching photos');
+        toast.error('Gagal memuat foto. Silakan coba lagi.');
         return []
     }
 }
@@ -25,7 +25,7 @@ export default async function GaleriFotoPage() {
     return (
         <div className="w-full min-h-screen bg-gray-100 dark:bg-gray-950">
             {/* Header */}
-            <header className=" flex sticky top-0 z-40 bg-white dark:bg-gray-900 shadow-sm">
+            <header className=" flex sticky top-0 z-40">
                 <div className="container mx-auto px-4 py-4 flex items-center gap-4">
                     <Link
                         href="/"

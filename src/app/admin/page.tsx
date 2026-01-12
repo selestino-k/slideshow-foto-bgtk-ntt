@@ -8,6 +8,7 @@ import prisma from "@/lib/prisma";
 import { DashChart } from "@/components/admin/dash-chart";
 import { format, subMonths, addMonths, startOfMonth, endOfMonth, parseISO, isValid } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
+import { toast } from "@/hooks/use.toast";
 
 async function getDashboardData() {
     const totalPhotos = await prisma.photo.count();
@@ -23,14 +24,13 @@ async function getDashboardData() {
         },
     });
 
-    console.log('Sample timelineDate values:', photos.slice(0, 3).map(p => p.timelineDate));
 
-    // Calculate chart data - showing past 3 months, current month, and next 2 months
+    // Calculate chart data - showing past 12 months, current month, and next 2 months
     const months: { month: string; count: number }[] = [];
     const currentDate = new Date();
     
-    // Start from 3 months ago and go to 2 months in the future
-    for (let i = -12; i <= 2; i++) {
+    // Start from 12 months ago and go to 3 months in the future
+    for (let i = -12; i <= 3; i++) {
         const monthDate = i < 0 ? subMonths(currentDate, Math.abs(i)) : addMonths(currentDate, i);
         const monthStart = startOfMonth(monthDate);
         const monthEnd = endOfMonth(monthDate);
@@ -40,28 +40,25 @@ async function getDashboardData() {
                 const photoDate = parseISO(photo.timelineDate);
                 
                 if (!isValid(photoDate)) {
-                    console.warn('Invalid date:', photo.timelineDate);
+                    toast.warning('Invalid date: ' + photo.timelineDate);
                     return false;
                 }
                 
                 const inRange = photoDate >= monthStart && photoDate <= monthEnd;
-                if (inRange) {
-                    console.log(`Photo date ${photo.timelineDate} is in ${format(monthDate, "MMMM yyyy", { locale: idLocale })}`);
-                }
                 return inRange;
-            } catch (error) {
-                console.error('Error parsing date:', photo.timelineDate, error);
+            } catch {
+            toast.error('Error parsing date: ' + photo.timelineDate);
                 return false;
+                
             }
         });
-        
+
         months.push({
             month: format(monthDate, "MMMM",  { locale: idLocale }),
             count: photosInMonth.length,
         });
     }
 
-    console.log('Chart data:', months);
 
     return {
         totalPhotos,

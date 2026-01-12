@@ -8,7 +8,6 @@ import {
     CarouselContent,
     CarouselItem,
     CarouselNext,
-    CarouselPrevious,
     type CarouselApi,
 } from "@/components/ui/carousel"
 import { Calendar, MapPin } from "lucide-react"
@@ -93,7 +92,7 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
                                     )}
                                 </div>
 
-                                <h3 className="text-white text-4xl font-bold w-full">
+                                <h3 className="text-white text-5xl font-semibold font-geist w-full">
                                     {photo.photoName}
                                 </h3>
                                 {photo.description && (

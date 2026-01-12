@@ -151,7 +151,7 @@ export const columns: ColumnDef<Foto>[] = [
               <DialogTitle className="text-2xl font-bold mb-4">Deskripsi Lengkap</DialogTitle>  
             </DialogHeader>
             <div className="p-4">
-              <p className="text-lg font-medium leading-relaxed">{description}</p>
+              <p className="text-md font-base leading-relaxed">{description}</p>
             </div>
           </DialogContent>
         </Dialog>

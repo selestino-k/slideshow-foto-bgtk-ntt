@@ -40,7 +40,7 @@ export function DashChart({ initialData }: DashChartProps) {
       <CardHeader>
         <CardTitle>Grafik Jumlah Foto</CardTitle>
         <CardDescription>
-          Jumlah foto dalam 15 bulan (12 bulan lalu hingga 2 bulan ke depan)
+          Jumlah foto dalam 15 bulan (12 bulan lalu hingga 3 bulan ke depan)
         </CardDescription>
       </CardHeader>
       <CardContent>

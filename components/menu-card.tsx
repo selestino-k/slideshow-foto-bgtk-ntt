@@ -1,18 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import * as Icons from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface MenuCardProps {
   iconName: string;
   title: string;
+  description: string;
   href: string;
 }
 
-export default function MenuCard({ iconName, title, href }: MenuCardProps) {
+export default function MenuCard({ iconName, title, description, href }: MenuCardProps) {
   const router = useRouter();
   const Icon = (Icons[iconName as keyof typeof Icons] as LucideIcon) || Icons.ImageIcon;
 
@@ -25,17 +25,17 @@ export default function MenuCard({ iconName, title, href }: MenuCardProps) {
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
-      <Button
-        onClick={handleClick}
-        variant="ghost"
-        className="w-full h-full p-0"
-      >
-        <CardContent className="flex items-center gap-8 p-8 bg-primary hover:bg-primary/90 text-white w-full">
-          <Icon className="max-w-7xl max-h-7xl" />
-          <span className="text-2xl font-semibold">{title}</span>
-        </CardContent>
-      </Button>
+    <Card 
+      className="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105 w-full"
+      onClick={handleClick}
+    >
+      <CardHeader>
+        <div className="flex items-center gap-4">
+          <Icon className="w-8 h-8 text-primary" />
+          <CardTitle className="text-xl">{title}</CardTitle>
+        </div>
+        <CardDescription className="mt-2">{description}</CardDescription>
+      </CardHeader>
     </Card>
   );
 }
