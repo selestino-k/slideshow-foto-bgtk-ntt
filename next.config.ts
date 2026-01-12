@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
- 
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', // Increase to 10 MB or whatever you need
+    },
+  },
   images: {
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [
