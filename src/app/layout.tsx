@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "Slideshow Foto BGTK NTT",
-    description: "Aplikasi slideshow foto untuk Kepala BGTK NTT",
+    description: "Aplikasi slideshow foto BGTK Provinsi NTT",
 };
 
 export default function RootLayout({

@@ -65,7 +65,7 @@ export async function AdminAppSidebar() {
                     <SidebarGroupContent>
                         <DropdownMenu>
                         </DropdownMenu>
-                        <SidebarGroupLabel className="text-base items-center text-white dark:text-white-700 mb-5">PANEL ADMIN</SidebarGroupLabel>
+                        <SidebarGroupLabel className="text-base items-center text-white dark:text-white-700 mb-5">PANEL ADMIN SLIDESHOW</SidebarGroupLabel>
                         <SidebarMenu className="space-y-3 font-semibold font-geist">
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>

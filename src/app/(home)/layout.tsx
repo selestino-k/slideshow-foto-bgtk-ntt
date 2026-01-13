@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
-  title: "Slideshow Foto Kepala BGTK Provinsi NTT",
+  title: "Slideshow Foto BGTK Provinsi NTT",
   keywords: ["Balai GTK NTT", "Balai GTK Provinsi NTT", "BGTK NTT", "Balai Guru dan Tenaga Kependidikan NTT"],
   description: "Balai Guru dan Tenaga Kependidikan Provinsi Nusa Tenggara Timur",
 };
