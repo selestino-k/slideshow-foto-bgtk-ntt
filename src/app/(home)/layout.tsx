@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
   title: "Slideshow Foto BGTK Provinsi NTT",
   keywords: ["Balai GTK NTT", "Balai GTK Provinsi NTT", "BGTK NTT", "Balai Guru dan Tenaga Kependidikan NTT"],
-  description: "Balai Guru dan Tenaga Kependidikan Provinsi Nusa Tenggara Timur",
+  description: "Aplikasi Slideshow foto - Balai Guru dan Tenaga Kependidikan Provinsi Nusa Tenggara Timur",
 };
 
 export const viewport: Viewport = {
