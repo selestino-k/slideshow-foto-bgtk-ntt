@@ -29,7 +29,7 @@ interface HomeCarouselProps {
 
 export function HomeCarousel({ photos }: HomeCarouselProps) {
     const Plugin = React.useRef([
-        Autoplay({ delay: 2500, stopOnInteraction: false }),
+        Autoplay({ delay: 8000, stopOnInteraction: false }),
     ])
     const autoplayRef = React.useRef<typeof Autoplay.prototype | null>(null)
     const [api, setApi] = React.useState<CarouselApi>()
