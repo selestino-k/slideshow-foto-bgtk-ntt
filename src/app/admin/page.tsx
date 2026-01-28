@@ -8,7 +8,7 @@ import prisma from "@/lib/prisma";
 import { DashChart } from "@/components/admin/dash-chart";
 import { format, subMonths, addMonths, startOfMonth, endOfMonth, parseISO, isValid } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
-import { toast } from "@/hooks/use.toast";
+import { toast } from "@/hooks/use-toast";
 
 async function getDashboardData() {
     const totalPhotos = await prisma.photo.count();

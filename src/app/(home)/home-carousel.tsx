@@ -78,7 +78,7 @@ export function HomeCarousel({ photos }: HomeCarouselProps) {
                                 className="object-cover carousel-item-zoom"
                                 priority={photo.id === photos[0]?.id}
                             />
-                            <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 pb-15">
+                            <div className="absolute inset-0 bg-black/15 flex flex-col justify-end p-6 pb-15">
                                 <div className="flex items-center mb-2">
                                     <h4 className="text-gray-200 text-xl mt-2 mb-2 mr-6 ">
                                         <Calendar className="inline-block mr-2 mb-1" />

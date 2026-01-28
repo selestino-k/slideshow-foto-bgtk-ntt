@@ -16,14 +16,14 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
-import { deletePhoto } from "@/lib/actions/photo-actions"
+import { deleteSchedule } from "@/lib/actions/schedule-actions"
 
-interface DeleteFotoDialogProps {
+interface DeleteJadwalDialogProps {
   id: number
-  photoName: string
+  title: string
 }
 
-export function DeleteFotoDialog({ id, photoName }: DeleteFotoDialogProps) {
+export function DeleteJadwalDialog({ id, title }: DeleteJadwalDialogProps) {
   const router = useRouter()
   const { toast } = useToast()
   const [isDeleting, setIsDeleting] = useState(false)
@@ -33,24 +33,24 @@ export function DeleteFotoDialog({ id, photoName }: DeleteFotoDialogProps) {
     setIsDeleting(true)
 
     try {
-      const result = await deletePhoto(id)
+      const result = await deleteSchedule(id)
 
       if (!result.success) {
-        throw new Error(result.error || "Gagal menghapus foto")
+        throw new Error(result.error || "Gagal menghapus Jadwal")
       }
 
       toast({
         title: "Sukses",
-        description: "Foto berhasil dihapus",
+        description: "Jadwal berhasil dihapus",
       })
 
       setOpen(false)
       router.refresh()
     } catch (error) {
-      console.error("Gagal menghapus foto:", error)
+      console.error("Gagal menghapus jadwal:", error)
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Gagal menghapus foto",
+        description: error instanceof Error ? error.message : "Gagal menghapus jadwal",
         variant: "destructive",
       })
     } finally {
@@ -67,9 +67,9 @@ export function DeleteFotoDialog({ id, photoName }: DeleteFotoDialogProps) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hapus Foto?</AlertDialogTitle>
+          <AlertDialogTitle>Hapus Jadwal?</AlertDialogTitle>
           <AlertDialogDescription>
-            Apakah Anda yakin ingin menghapus foto <strong>&quot;{photoName}&quot;</strong>?
+            Apakah Anda yakin ingin menghapus jadwal <strong>&quot;{title}&quot;</strong>?
             Tindakan ini tidak dapat dibatalkan.
           </AlertDialogDescription>
         </AlertDialogHeader>

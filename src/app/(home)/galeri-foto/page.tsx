@@ -3,7 +3,7 @@ import { FotoGallery } from "./foto-gallery"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ModeToggle } from "@/components/dark-switch"
-import { toast } from "@/hooks/use.toast"
+import { toast } from "@/hooks/use-toast"
 
 async function getAllPhotos() {
     try {

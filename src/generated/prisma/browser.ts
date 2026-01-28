@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Photo = Prisma.PhotoModel
+/**
+ * Model Schedule
+ * 
+ */
+export type Schedule = Prisma.ScheduleModel

@@ -1,4 +1,4 @@
-import {  ChartPie, User, ImagePlay, List } from "lucide-react"
+import {  ChartPie, User, ImagePlay, List, Calendar } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -33,6 +33,11 @@ const items = [
         title: "Galeri Foto",
         url: "/admin/galeri-foto",
         icon: ImagePlay,
+    },
+    {
+        title: "Jadwal Kegiatan",
+        url: "/admin/jadwal",
+        icon: Calendar,
     },
     {
         title: "Pengguna",

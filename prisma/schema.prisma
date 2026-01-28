@@ -30,3 +30,16 @@ model Photo {
 
   @@map("photos")
 }
+
+model Schedule {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  eventStart   DateTime @map("event_start")
+  eventEnd     DateTime @map("event_end")
+  location    String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("schedules")
+}

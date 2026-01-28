@@ -3,7 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FotoGallery } from "./foto-gallery";
-import {toast } from "@/hooks/use.toast";
+import {toast } from "@/hooks/use-toast";
 
 
 async function getAllPhotos() {

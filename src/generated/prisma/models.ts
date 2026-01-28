@@ -10,4 +10,5 @@
  */
 export type * from './models/User'
 export type * from './models/Photo'
+export type * from './models/Schedule'
 export type * from './commonInputTypes'

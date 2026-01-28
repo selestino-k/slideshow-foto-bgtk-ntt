@@ -3,6 +3,7 @@
 import prisma from '@/lib/prisma';
 import { uploadImageToS3, deleteImageFromS3 } from './s3-actions';
 import { revalidatePath } from 'next/cache';
+import { toast } from 'sonner';
 
 export async function getPhotos() {
   try {
@@ -12,8 +13,8 @@ export async function getPhotos() {
       },
     });
     return photos;
-  } catch (error) {
-    console.error('Error fetching photos:', error);
+  } catch {
+    toast.error('Gagal memuat foto.');
     return [];
   }
 }
@@ -24,8 +25,8 @@ export async function getPhotoById(id: string) {
       where: { id: parseInt(id) },
     });
     return photo;
-  } catch (error) {
-    console.error('Error fetching photo:', error);
+  } catch {
+    toast.error('Gagal memuat foto.');
     return null;
   }
 }
@@ -74,11 +75,11 @@ export async function createPhoto(formData: FormData) {
 
     revalidatePath('/');
     return { success: true, photo };
-  } catch (error) {
-    console.error('Error creating photo:', error);
+  } catch {
+    toast.error('Gagal membuat foto.');
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Failed to create photo',
+      error: 'Failed to create photo',
     };
   }
 }
@@ -152,11 +153,11 @@ export async function updatePhoto(formData: FormData) {
     revalidatePath('/');
     revalidatePath('/admin/daftar-foto');
     return { success: true, photo };
-  } catch (error) {
-    console.error('Error updating photo:', error);
+  } catch {
+    toast.error('Gagal memperbarui foto.');
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Failed to update photo',
+      error: 'Gagal memperbarui foto.',
     };
   }
 }
@@ -176,7 +177,7 @@ export async function deletePhoto(id: number) {
     const deleteResult = await deleteImageFromS3(photo.imageUrl);
 
     if (!deleteResult.success) {
-      console.error('Failed to delete image from S3:', deleteResult.error);
+      toast.error('Gagal menghapus gambar dari S3.');
       // Continue with database deletion even if S3 deletion fails
     }
 
@@ -187,11 +188,11 @@ export async function deletePhoto(id: number) {
 
     revalidatePath('/');
     return { success: true };
-  } catch (error) {
-    console.error('Error deleting photo:', error);
+  } catch {
+    toast.error('Gagal menghapus foto.');
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Failed to delete photo',
+      error: 'Gagal menghapus foto.',
     };
   }
 }
@@ -207,8 +208,8 @@ export async function getPhotosByTimelineDate(timelineDate: string) {
       },
     });
     return photos;
-  } catch (error) {
-    console.error('Error fetching photos by timeline:', error);
+  } catch {
+    toast.error('Gagal memuat foto berdasarkan timeline.');
     return [];
   }
 }

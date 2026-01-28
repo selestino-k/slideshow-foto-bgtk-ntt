@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma"
 import "./zoom.css"
 import Image from "next/image"
 import { ModeToggle } from "@/components/dark-switch"
-import { toast } from "@/hooks/use.toast"
+import {toast} from "sonner"
 
 async function getCarouselPhotos() {
   try {
@@ -70,6 +70,12 @@ export default async function Home() {
             title="Admin"
             description="Panel admin untuk manajemen foto slideshow"
             href="/admin"
+          />
+          <MenuCard 
+            iconName="Calendar"
+            title="Jadwal"
+            description="Lihat jadwal yang sedang jalan dan mendatang dari Kepala BGTK Provinsi NTT"
+            href="/jadwal"
           />
         </div>
       </div>
