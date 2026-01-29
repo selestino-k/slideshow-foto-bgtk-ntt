@@ -10,9 +10,10 @@ interface MenuCardProps {
   title: string;
   description: string;
   href: string;
+  target?: string;
 }
 
-export default function MenuCard({ iconName, title, description, href }: MenuCardProps) {
+export default function MenuCard({ iconName, title, description, href, target }: MenuCardProps) {
   const Icon = (Icons[iconName as keyof typeof Icons] as LucideIcon) || Icons.ImageIcon;
 
   
@@ -22,7 +23,7 @@ export default function MenuCard({ iconName, title, description, href }: MenuCar
       className="cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105 w-full"
     >
       <CardHeader>
-        <Link href={href}>
+        <Link href={href} target={target}>
         <div className="flex items-center gap-4">
           <Icon className="w-8 h-8 text-primary" />
           <CardTitle className="text-xl">{title}</CardTitle>

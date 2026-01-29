@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { toast } from "sonner";
+import {revalidatePath} from "next/cache";
 
 export async function getSchedules() {
   try {
@@ -40,13 +41,14 @@ export async function createSchedule(data: {
     const schedule = await prisma.schedule.create({
         data: {
         title: data.title,
-        description: data.description,
+        description: data.description || null,
         eventStart: data.eventStart,
         eventEnd: data.eventEnd,
-        location: data.location,
+        location: data.location || null,
         },
     });
     return { success: true, schedule };
+    revalidatePath("/admin/jadwal");
   } catch {
     toast.error("Gagal membuat jadwal.");
     return { success: false, error: "Gagal membuat jadwal." };
@@ -74,6 +76,7 @@ export async function updateSchedule(formData: FormData, id:number) {
         },
     });
     return { success: true, schedule };
+    revalidatePath("/admin/jadwal");
   } catch {
     toast.error("Gagal memperbarui jadwal.");
     return { success: false, error: "Gagal memperbarui jadwal." };

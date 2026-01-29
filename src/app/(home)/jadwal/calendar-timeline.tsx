@@ -5,7 +5,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Clock, MapPin } from 'lucide-react'
-import { format, isSameDay, parseISO } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import { id } from 'date-fns/locale'
 
 interface Schedule {
@@ -26,25 +26,69 @@ interface CalendarTimelineProps {
 export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
-  // Get schedules for selected date
-  const selectedSchedules = schedules.filter((schedule) =>
-    isSameDay(parseISO(schedule.eventStart.toString()), selectedDate)
-  )
+  // Get schedules for selected date (including multi-day events)
+  const selectedSchedules = schedules.filter((schedule) => {
+    const startDate = schedule.eventStart instanceof Date 
+      ? schedule.eventStart 
+      : parseISO(String(schedule.eventStart))
+    const endDate = schedule.eventEnd instanceof Date 
+      ? schedule.eventEnd 
+      : parseISO(String(schedule.eventEnd))
+    
+    // Check if selectedDate falls within the event period (inclusive)
+    const selectedDay = new Date(selectedDate)
+    selectedDay.setHours(0, 0, 0, 0)
+    
+    const eventStartDay = new Date(startDate)
+    eventStartDay.setHours(0, 0, 0, 0)
+    
+    const eventEndDay = new Date(endDate)
+    eventEndDay.setHours(0, 0, 0, 0)
+    
+    return selectedDay >= eventStartDay && selectedDay <= eventEndDay
+  })
 
   // Get dates that have schedules for calendar highlighting
-  const scheduleDates = schedules.map((schedule) =>
-    parseISO(schedule.eventStart.toString())
-  )
+  const scheduleDates = schedules.flatMap((schedule) => {
+    const startDate = schedule.eventStart instanceof Date 
+      ? schedule.eventStart 
+      : parseISO(String(schedule.eventStart))
+    const endDate = schedule.eventEnd instanceof Date 
+      ? schedule.eventEnd 
+      : parseISO(String(schedule.eventEnd))
+    
+    // Generate all dates between start and end
+    const dates = []
+    const currentDate = new Date(startDate)
+    currentDate.setHours(0, 0, 0, 0)
+    
+    const lastDate = new Date(endDate)
+    lastDate.setHours(0, 0, 0, 0)
+    
+    while (currentDate <= lastDate) {
+      dates.push(new Date(currentDate))
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+    
+    return dates
+  })
 
   // Format time
   const formatTime = (date: Date) => {
-    return format(parseISO(date.toString()), 'HH:mm', { locale: id })
+    const eventDate = date instanceof Date ? date : parseISO(String(date))
+    return format(eventDate, 'HH:mm', { locale: id })
+  }
+
+  // Format date
+  const formatDate = (date: Date) => {
+    const eventDate = date instanceof Date ? date : parseISO(String(date))
+    return format(eventDate, 'dd/MM/yyyy', { locale: id })
   }
 
   // Calculate duration
   const calculateDuration = (start: Date, end: Date) => {
-    const startDate = parseISO(start.toString())
-    const endDate = parseISO(end.toString())
+    const startDate = start instanceof Date ? start : parseISO(String(start))
+    const endDate = end instanceof Date ? end : parseISO(String(end))
     const diff = endDate.getTime() - startDate.getTime()
     const hours = Math.floor(diff / (1000 * 60 * 60))
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
@@ -75,12 +119,8 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
             modifiers={{
               scheduled: scheduleDates,
             }}
-            modifiersStyles={{
-              scheduled: {
-                fontWeight: 'bold',
-                backgroundColor: 'hsl(var(--primary))',
-                color: 'white',
-              },
+            modifiersClassNames={{
+              scheduled: 'bg-primary text-primary-foreground font-bold',
             }}
           />
           <div className="mt-4 text-sm text-muted-foreground">
@@ -104,8 +144,8 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
             <div className="space-y-4">
               {selectedSchedules
                 .sort((a, b) => {
-                  const dateA = parseISO(a.eventStart.toString())
-                  const dateB = parseISO(b.eventStart.toString())
+                  const dateA = a.eventStart instanceof Date ? a.eventStart : parseISO(String(a.eventStart))
+                  const dateB = b.eventStart instanceof Date ? b.eventStart : parseISO(String(b.eventStart))
                   return dateA.getTime() - dateB.getTime()
                 })
                 .map((schedule, index) => (
@@ -119,12 +159,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                     )}
 
                     {/* Timeline Dot */}
-                    <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary border-4 border-background" />
+                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background" />
 
                     {/* Schedule Card */}
-                    <div className="bg-muted/50 rounded-lg p-4 hover:bg-muted transition-colors">
+                    <div className="bg-muted/50 rounded-lg hover:bg-muted transition-colors">
                       <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 space-y-2">
+                        <div className="flex-1 space-y-2 max-w-xl">
                           <h3 className="font-semibold text-lg">
                             {schedule.title}
                           </h3>
@@ -135,12 +175,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                             </p>
                           )}
 
-                          <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                          <div className="grid flex-wrap gap-3 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <Clock className="w-4 h-4" />
                               <span>
-                                {formatTime(schedule.eventStart)} -{' '}
-                                {formatTime(schedule.eventEnd)}
+                                {formatDate(schedule.eventStart)} {formatTime(schedule.eventStart)} -{' '}
+                                {formatDate(schedule.eventEnd)} {formatTime(schedule.eventEnd)}
                               </span>
                             </div>
                             {schedule.location && (
@@ -151,7 +191,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                             )}
                           </div>
 
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge variant="secondary" className="text-xs pl-0">
                             Durasi: {calculateDuration(schedule.eventStart, schedule.eventEnd)}
                           </Badge>
                         </div>

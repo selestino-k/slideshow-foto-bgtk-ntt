@@ -25,6 +25,7 @@ import { useToast } from "@/hooks/use-toast"
 import { updateSchedule } from "@/lib/actions/schedule-actions"
 import { format } from "date-fns"
 import { id as idLocale } from "date-fns/locale"
+import { useRouter } from "next/navigation"
 
 interface EditJadwalDialogProps {
   id: number
@@ -44,6 +45,7 @@ export function EditJadwalDialog({
   location 
 }: EditJadwalDialogProps) {
   const { toast } = useToast()
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   
@@ -91,7 +93,7 @@ export function EditJadwalDialog({
       if (!result.success) {
         throw new Error(result.error || "Gagal memperbarui jadwal")
       }
-
+      router.refresh()
       toast({
         title: "Sukses",
         description: "Jadwal berhasil diperbarui",

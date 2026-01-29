@@ -3,6 +3,8 @@ import { ArrowLeft } from "lucide-react"
 import { ModeToggle } from "@/components/dark-switch"
 import { getSchedules } from '@/lib/actions/schedule-actions'
 import { CalendarTimeline } from './calendar-timeline'
+import { DataTable } from "@/components/ui/data-table"
+import { columns } from "./columns"
 
 export default async function JadwalPage() {
   const schedules = await getSchedules()
@@ -30,7 +32,10 @@ export default async function JadwalPage() {
       {/* Calendar Content */}
       <main className="container mx-auto px-4 py-6">
         <CalendarTimeline schedules={schedules} />
+        <div className="mt-5" />
+        <DataTable columns={columns} data={schedules} />
       </main>
+
     </div>
   )
 }

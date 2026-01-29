@@ -64,6 +64,7 @@ export default async function Home() {
             title="Website BGTK NTT"
             description="Kunjungi website resmi BGTK Provinsi NTT"
             href="https://bgtkntt.kemendikdasmen.go.id/"
+            target="_blank"
           />
           <MenuCard
             iconName="UserCircle"

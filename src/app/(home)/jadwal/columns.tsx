@@ -1,11 +1,9 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { EditJadwalDialog } from "./edit-jadwal-dialog";
-import { DeleteJadwalDialog } from "./delete-jadwal-dialog";
 
 
-export type Jadwal = {
+export type JadwalHome = {
     id: number;
     title: string;
     description: string | null;
@@ -15,7 +13,7 @@ export type Jadwal = {
     createdAt: Date;
 };
 
-export const columns: ColumnDef<Jadwal>[] = [
+export const columns: ColumnDef<JadwalHome>[] = [
     {
         accessorKey: "id",
         header: "ID",
@@ -25,12 +23,12 @@ export const columns: ColumnDef<Jadwal>[] = [
         },
     },
     {
-        accessorKey: "title",
+        accessorKey: "eventName",
         header: "Nama Acara",
     },
     {
         accessorKey: "eventStart",
-        header: "Waktu Mulai",
+        header: "Tanggal Mulai",
         cell: ({ row }) => {
             const eventStart = new Date(row.original.eventStart);
             return (
@@ -40,18 +38,13 @@ export const columns: ColumnDef<Jadwal>[] = [
                         month: "long",
                         year: "numeric",
                     })}
-                    {", Pukul "}
-                    {eventStart.toLocaleTimeString("id-ID", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    })}
                 </span>
             );
         }
     },
     {
         accessorKey: "eventEnd",
-        header: "Waktu Selesai",
+        header: "Tanggal Selesai",
         cell: ({ row }) => {
             const eventEnd = new Date(row.original.eventEnd);
             return (
@@ -60,11 +53,6 @@ export const columns: ColumnDef<Jadwal>[] = [
                         day: "numeric",
                         month: "long",
                         year: "numeric",
-                    })}
-                    {", Pukul "}
-                    {eventEnd.toLocaleTimeString("id-ID", {
-                        hour: "2-digit",
-                        minute: "2-digit",
                     })}
                 </span>
             );
@@ -82,30 +70,5 @@ export const columns: ColumnDef<Jadwal>[] = [
             );
         },
     },
-    {
-        id: "actions",
-        header: "Aksi",
-        cell: ({ row }) => {
-            const jadwalId = row.original.id;
-            const jadwalTitle = row.original.title;
-            return (
-                <div className="flex items-center gap-2">
-                <EditJadwalDialog  
-                    id={jadwalId}
-                    title={row.original.title}
-                    description={row.original.description}
-                    eventStart={row.original.eventStart}
-                    eventEnd={row.original.eventEnd}
-                    location={row.original.location}
-                />
-                <DeleteJadwalDialog 
-                    id={jadwalId} 
-                    title={jadwalTitle} 
-                />
-                </div>
-
-
-            );
-        },
-    },
+    
 ];

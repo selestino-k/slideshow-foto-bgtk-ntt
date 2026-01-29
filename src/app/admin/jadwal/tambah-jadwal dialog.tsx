@@ -25,9 +25,11 @@ import { useToast } from "@/hooks/use-toast"
 import { createSchedule } from "@/lib/actions/schedule-actions"
 import { format } from "date-fns"
 import { id as idLocale }  from "date-fns/locale"
+import { useRouter } from "next/navigation"
 
 export function TambahJadwalDialog() {
   const { toast } = useToast()
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [startDate, setStartDate] = useState<Date>()
@@ -76,7 +78,7 @@ export function TambahJadwalDialog() {
       if (!result.success) {
         throw new Error(result.error || "Gagal membuat jadwal")
       }
-
+      router.refresh()
       toast({
         title: "Sukses",
         description: "Jadwal berhasil ditambahkan",
@@ -158,6 +160,7 @@ export function TambahJadwalDialog() {
                       size="lg"
                       disabled={isLoading}
                     >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
                       {startDate ? format(startDate, "PPP", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -167,6 +170,7 @@ export function TambahJadwalDialog() {
                       mode="single"
                       selected={startDate}
                       onSelect={setStartDate}
+                      locale={idLocale}
                     />
                   </PopoverContent>
                 </Popover>
@@ -191,6 +195,7 @@ export function TambahJadwalDialog() {
                       size="lg"
                       disabled={isLoading}
                     >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
                       {endDate ? format(endDate, "PPP", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -200,6 +205,7 @@ export function TambahJadwalDialog() {
                       mode="single"
                       selected={endDate}
                       onSelect={setEndDate}
+                      locale={idLocale}
                     />
                   </PopoverContent>
                 </Popover>
