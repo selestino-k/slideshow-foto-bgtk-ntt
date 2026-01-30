@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Clock, MapPin } from 'lucide-react'
+import { Clock, MapPin, Timer } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
 import { id } from 'date-fns/locale'
 
@@ -120,12 +119,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
               scheduled: scheduleDates,
             }}
             modifiersClassNames={{
-              scheduled: 'bg-primary text-primary-foreground font-bold',
+              scheduled: 'bg-event text-primary-foreground font-bold rounded-xs',
             }}
           />
           <div className="mt-4 text-sm text-muted-foreground">
             <p className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-primary"></span>
+              <span className="w-3 h-3 rounded-xs bg-event"></span>
               Tanggal dengan jadwal
             </p>
           </div>
@@ -159,7 +158,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                     )}
 
                     {/* Timeline Dot */}
-                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background" />
+                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-event border-4 border-background" />
 
                     {/* Schedule Card */}
                     <div className="bg-muted/50 rounded-lg hover:bg-muted transition-colors">
@@ -189,11 +188,13 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                                 <span>{schedule.location}</span>
                               </div>
                             )}
+                            <div className="flex items-center gap-1">
+                              <Timer className="w-4 h-4" />
+                              <span>Durasi: {calculateDuration(schedule.eventStart, schedule.eventEnd)}</span>
+                              </div>
                           </div>
 
-                          <Badge variant="secondary" className="text-xs pl-0">
-                            Durasi: {calculateDuration(schedule.eventStart, schedule.eventEnd)}
-                          </Badge>
+                         
                         </div>
                       </div>
                     </div>

@@ -16,14 +16,14 @@ export type JadwalHome = {
 export const columns: ColumnDef<JadwalHome>[] = [
     {
         accessorKey: "id",
-        header: "ID",
+        header: "No.",
         cell: ({ row }) => {
-            const id = row.original.id.toString();
+            const id = row.index + 1;
             return <span className="text-xs font-mono">{id}</span>;
-        },
+        }
     },
     {
-        accessorKey: "eventName",
+        accessorKey: "title",
         header: "Nama Acara",
     },
     {
@@ -37,6 +37,11 @@ export const columns: ColumnDef<JadwalHome>[] = [
                         day: "numeric",
                         month: "long",
                         year: "numeric",
+                    })}
+                    {", Pukul "}
+                    {eventStart.toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
                     })}
                 </span>
             );
@@ -53,6 +58,11 @@ export const columns: ColumnDef<JadwalHome>[] = [
                         day: "numeric",
                         month: "long",
                         year: "numeric",
+                    })}
+                    {", Pukul "}
+                    {eventEnd.toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
                     })}
                 </span>
             );

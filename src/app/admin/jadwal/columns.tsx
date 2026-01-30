@@ -20,9 +20,9 @@ export const columns: ColumnDef<Jadwal>[] = [
         accessorKey: "id",
         header: "ID",
         cell: ({ row }) => {
-            const id = row.original.id.toString();
+            const id = row.index + 1;
             return <span className="text-xs font-mono">{id}</span>;
-        },
+        }
     },
     {
         accessorKey: "title",
