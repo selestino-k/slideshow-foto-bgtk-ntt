@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/dark-switch";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Panel Admin CMS BGTK NTT",
-  description: "Panel Admin CMS BGTK NTT",
+    title: "Masuk | Panel Admin Slideshow dan SI Jadwal BGTK NTT",
+    description: "Silahkan masuk ke akun Anda untuk melanjutkan.",
 };
 
 export default function AuthLayout({

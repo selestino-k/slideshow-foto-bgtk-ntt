@@ -1,6 +1,6 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const geistSans = Geist({
@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Slideshow Foto BGTK NTT",
-    description: "Aplikasi slideshow foto BGTK Provinsi NTT",
+    title: "Slideshow Foto dan SI Jadwal BGTK NTT",
+    description: "Aplikasi slideshow foto dan SI jadwal BGTK Provinsi NTT",
     keywords: [
         "Balai GTK NTT",
         "Balai GTK Provinsi NTT",

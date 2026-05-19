@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Clock, MapPin, Timer } from 'lucide-react'
+import { Clock, MapPin, Presentation, Timer } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { JadwalDetailDialog, type JadwalDetail } from './jadwal-detail-dialog'
@@ -99,10 +99,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
     <>
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Calendar Section */}
-      <Card className="lg:col-span-1">
-        <CardHeader>
-          <CardTitle>Kalender</CardTitle>
-        </CardHeader>
+      <Card className="lg:col-span-1 items-center">
         <CardContent className="space-y-4 items-center">
           <Calendar
             mode="single"
@@ -157,7 +154,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
 
                     {/* Schedule Card */}
                     <div
-                      className="bg-muted/50 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+                      className="rounded-lg hover:bg-muted transition-colors cursor-pointer mx-2 p-4"
                       onClick={() => { setDialogJadwal(schedule); setDialogOpen(true); }}
                     >
                       <div className="flex items-start justify-between gap-4">
@@ -180,6 +177,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                                 {formatDate(schedule.eventEnd)} {formatTime(schedule.eventEnd)}
                               </span>
                             </div>
+                            {schedule.meetingType && (
+                              <div className="flex items-center gap-1">
+                                <Presentation className="w-4 h-4" />
+                                <span>Jenis: {schedule.meetingType}</span>
+                              </div>
+                            )}
                             {schedule.location && (
                               <div className="flex items-center gap-1">
                                 <MapPin className="w-4 h-4" />

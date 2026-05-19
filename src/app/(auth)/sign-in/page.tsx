@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import { LoginForm } from "@/components/auth/login-form";
 import { Suspense } from "react";
 import Link from "next/link";
@@ -10,14 +9,7 @@ declare module "next-auth" {
     interface User {
         role?: string;
     }
-
-    
 }
-
-export const metadata: Metadata = {
-    title: "Masuk | Panel Admin CMS BGTK NTT",
-    description: "Silahkan masuk ke akun Anda untuk melanjutkan.",
-};
 
 export default async function SignInPage() {
     return (
@@ -38,7 +30,7 @@ export default async function SignInPage() {
                             </Link>
                         </div>
                         <h1 className="text-3xl font-geist font-bold text-primary mb-1">Selamat Datang</h1>
-                        <h2 className="text-md">Panel Admin Aplikasi Web Slideshow Foto <br />BGTK Provinsi NTT</h2>
+                        <h2 className="text-md">Panel Admin <br/> Aplikasi Web Slideshow Foto dan SI Jadwal <br />BGTK Provinsi NTT</h2>
                     </div>
 
                     <LoginForm />

@@ -1,8 +1,10 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 import { EditJadwalDialog } from "./edit-jadwal-dialog";
 import { DeleteJadwalDialog } from "./delete-jadwal-dialog";
+import { JadwalDetailDialog } from "../../(home)/jadwal/jadwal-detail-dialog";
 import { Button } from "@/components/ui/button";
 
 
@@ -116,46 +118,44 @@ export const columns: ColumnDef<Jadwal>[] = [
         },
     },
     {
-        accessorKey: "meetingLink",
-        header: "Link Pertemuan",
-        cell: ({ row }) => {
-            const meetingLink = row.getValue("meetingLink") as string | null;
-            return meetingLink ? (
-               <Button variant="link" className="p-0" onClick={() => window.open(meetingLink, "_blank")}>
-                Buka Link
-               </Button>
-            ) : (
-                <span className="text-sm text-gray-400 italic">-</span>
-            );
-        }
-    },
-    {
         id: "actions",
         header: "Aksi",
         cell: ({ row }) => {
             const jadwalId = row.original.id;
             const jadwalTitle = row.original.title;
-            return (
-                <div className="flex items-center gap-2">
-                <EditJadwalDialog  
-                    id={jadwalId}
-                    title={row.original.title}
-                    description={row.original.description}
-                    eventStart={row.original.eventStart}
-                    eventEnd={row.original.eventEnd}
-                    location={row.original.location}
-                    host={row.original.host}
-                    meetingType={row.original.meetingType}
-                    meetingLink={row.original.meetingLink}
-                />
-                <DeleteJadwalDialog 
-                    id={jadwalId} 
-                    title={jadwalTitle} 
-                />
-                </div>
 
+            const ActionsCell = () => {
+                const [detailOpen, setDetailOpen] = useState(false);
+                return (
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" onClick={() => setDetailOpen(true)}>
+                            Detail
+                        </Button>
+                        <JadwalDetailDialog
+                            jadwal={row.original}
+                            open={detailOpen}
+                            onOpenChange={setDetailOpen}
+                        />
+                        <EditJadwalDialog
+                            id={jadwalId}
+                            title={row.original.title}
+                            description={row.original.description}
+                            eventStart={row.original.eventStart}
+                            eventEnd={row.original.eventEnd}
+                            location={row.original.location}
+                            host={row.original.host}
+                            meetingType={row.original.meetingType}
+                            meetingLink={row.original.meetingLink}
+                        />
+                        <DeleteJadwalDialog
+                            id={jadwalId}
+                            title={jadwalTitle}
+                        />
+                    </div>
+                );
+            };
 
-            );
+            return <ActionsCell />;
         },
     },
 ];
