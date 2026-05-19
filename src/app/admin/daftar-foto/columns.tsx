@@ -92,7 +92,7 @@ export const columns: ColumnDef<Foto>[] = [
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost" className="h-auto p-2 justify-start">
-              <div className="max-w-[300px] text-left">
+              <div className="max-w-75 text-left">
                 <p className="font-medium truncate">{truncatedTitle}</p>
               </div>
             </Button>
@@ -141,7 +141,7 @@ export const columns: ColumnDef<Foto>[] = [
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost" className="h-auto p-2 justify-start">
-              <div className="max-w-[300px] text-left">
+              <div className="max-w-75 text-left">
                 <p className="font-medium truncate">{truncatedDescription}</p>
               </div>
             </Button>

@@ -1,8 +1,6 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { toast } from "sonner";
-import {revalidatePath} from "next/cache";
 
 export async function getSchedules() {
   try {
@@ -13,7 +11,6 @@ export async function getSchedules() {
     });
     return schedules;
   } catch {
-    toast.error("Gagal memuat jadwal.");
     return [];
   }
 }
@@ -25,17 +22,38 @@ export async function getScheduleById(id: number) {
     });
     return schedule;
   } catch {
-    toast.error("Gagal memuat jadwal.");
     return null;
+  }
+}
+
+export async function getUpcomingSchedules() {
+  try {
+    const now = new Date();
+    const schedules = await prisma.schedule.findMany({
+        where: {
+        eventStart: {
+            gte: now,
+        },
+        },
+        orderBy: {
+        eventStart: "asc",
+        },
+    });
+    return schedules;
+  } catch {
+    return [];
   }
 }
 
 export async function createSchedule(data: {
     title: string;
     description?: string;
+    host?: string;
     eventStart: Date;
     eventEnd: Date;
     location?: string;
+    meetingType?: string;
+    meetingLink?: string;
 }) {
   try {
     const schedule = await prisma.schedule.create({
@@ -45,12 +63,13 @@ export async function createSchedule(data: {
         eventStart: data.eventStart,
         eventEnd: data.eventEnd,
         location: data.location || null,
+        host: data.host || null,
+        meetingType: data.meetingType || null,
+        meetingLink: data.meetingLink || null,
         },
     });
     return { success: true, schedule };
-    revalidatePath("/admin/jadwal");
   } catch {
-    toast.error("Gagal membuat jadwal.");
     return { success: false, error: "Gagal membuat jadwal." };
   }
 }
@@ -64,6 +83,9 @@ export async function updateSchedule(formData: FormData, id:number) {
         eventStart: new Date(formData.get("eventStart") as string),
         eventEnd: new Date(formData.get("eventEnd") as string),
         location: formData.get("location") as string | null,
+        host: formData.get("host") as string | null,
+        meetingType: formData.get("meetingType") as string | null,
+        meetingLink: formData.get("meetingLink") as string | null,
     };
     const schedule = await prisma.schedule.update({
         where: { id: id },
@@ -73,12 +95,13 @@ export async function updateSchedule(formData: FormData, id:number) {
         eventStart: data.eventStart,
         eventEnd: data.eventEnd,
         location: data.location,
+        host: data.host,
+        meetingType: data.meetingType,
+        meetingLink: data.meetingLink,
         },
     });
     return { success: true, schedule };
-    revalidatePath("/admin/jadwal");
   } catch {
-    toast.error("Gagal memperbarui jadwal.");
     return { success: false, error: "Gagal memperbarui jadwal." };
   } 
 }
@@ -90,7 +113,6 @@ export async function deleteSchedule(id: number) {
     });
     return { success: true };
   } catch {
-    toast.error("Gagal menghapus jadwal.");
     return { success: false, error: "Gagal menghapus jadwal." };
   }
 }

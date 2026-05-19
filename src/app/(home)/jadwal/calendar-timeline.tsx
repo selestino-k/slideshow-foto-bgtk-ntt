@@ -6,17 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Clock, MapPin, Timer } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
 import { id } from 'date-fns/locale'
+import { JadwalDetailDialog, type JadwalDetail } from './jadwal-detail-dialog'
 
-interface Schedule {
-  id: number
-  title: string
-  description: string | null
-  eventStart: Date
-  eventEnd: Date
-  location: string | null
-  createdAt: Date
-  updatedAt: Date
-}
+type Schedule = JadwalDetail & { updatedAt: Date }
 
 interface CalendarTimelineProps {
   schedules: Schedule[]
@@ -24,6 +16,8 @@ interface CalendarTimelineProps {
 
 export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const [dialogJadwal, setDialogJadwal] = useState<JadwalDetail | null>(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   // Get schedules for selected date (including multi-day events)
   const selectedSchedules = schedules.filter((schedule) => {
@@ -102,6 +96,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
   }
 
   return (
+    <>
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Calendar Section */}
       <Card className="lg:col-span-1">
@@ -154,14 +149,17 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                   >
                     {/* Timeline Line */}
                     {index !== selectedSchedules.length - 1 && (
-                      <div className="absolute left-[11px] top-6 bottom-0 w-0.5 bg-border" />
+                      <div className="absolute left-2.75 top-6 bottom-0 w-0.5 bg-border" />
                     )}
 
                     {/* Timeline Dot */}
                     <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-event border-4 border-background" />
 
                     {/* Schedule Card */}
-                    <div className="bg-muted/50 rounded-lg hover:bg-muted transition-colors">
+                    <div
+                      className="bg-muted/50 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+                      onClick={() => { setDialogJadwal(schedule); setDialogOpen(true); }}
+                    >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1 space-y-2 max-w-xl">
                           <h3 className="font-semibold text-lg">
@@ -217,5 +215,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
         </CardContent>
       </Card>
     </div>
+
+    <JadwalDetailDialog
+      jadwal={dialogJadwal}
+      open={dialogOpen}
+      onOpenChange={setDialogOpen}
+    />
+  </>
   )
 }

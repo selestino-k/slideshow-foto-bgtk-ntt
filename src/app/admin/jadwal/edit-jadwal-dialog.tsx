@@ -20,12 +20,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
-import { Edit } from "lucide-react"
+import { Edit, CalendarIcon } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { updateSchedule } from "@/lib/actions/schedule-actions"
 import { format } from "date-fns"
 import { id as idLocale } from "date-fns/locale"
 import { useRouter } from "next/navigation"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface EditJadwalDialogProps {
   id: number
@@ -34,6 +35,9 @@ interface EditJadwalDialogProps {
   eventStart: Date
   eventEnd: Date
   location: string | null
+  host: string | null
+  meetingType: string | null
+  meetingLink: string | null
 }
 
 export function EditJadwalDialog({ 
@@ -42,7 +46,10 @@ export function EditJadwalDialog({
   description, 
   eventStart, 
   eventEnd, 
-  location 
+  location,
+  host,
+  meetingType,
+  meetingLink,
 }: EditJadwalDialogProps) {
   const { toast } = useToast()
   const router = useRouter()
@@ -64,6 +71,9 @@ export function EditJadwalDialog({
     title: title,
     description: description || "",
     location: location || "",
+    host: host || "",
+    meetingType: meetingType || "",
+    meetingLink: meetingLink || "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,6 +97,9 @@ export function EditJadwalDialog({
       formDataToSend.append("eventStart", newEventStart.toISOString())
       formDataToSend.append("eventEnd", newEventEnd.toISOString())
       formDataToSend.append("location", formData.location)
+      formDataToSend.append("host", formData.host)
+      formDataToSend.append("meetingType", formData.meetingType)
+      formDataToSend.append("meetingLink", formData.meetingLink)
 
       const result = await updateSchedule(formDataToSend, id)
 
@@ -110,14 +123,32 @@ export function EditJadwalDialog({
     }
   }
 
+  const handleOpenChange = (newOpen: boolean) => {
+    if (newOpen) {
+      setFormData({
+        title,
+        description: description || "",
+        location: location || "",
+        host: host || "",
+        meetingType: meetingType || "",
+        meetingLink: meetingLink || "",
+      })
+      setStartDate(new Date(eventStart))
+      setEndDate(new Date(eventEnd))
+      setStartTime(formatTime(eventStart))
+      setEndTime(formatTime(eventEnd))
+    }
+    setOpen(newOpen)
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="secondary">
           <Edit className="h-4 w-4"/>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-131.25">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Edit Jadwal</DialogTitle>
@@ -148,24 +179,37 @@ export function EditJadwalDialog({
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                rows={3}
+                rows={2}
                 disabled={isLoading}
               />
             </div>
             <div className="grid gap-2">
-              <Label>
-                Tanggal & Waktu Mulai <span className="text-red-500">*</span>
-              </Label>
-              <div className="flex gap-2">
+              <Label htmlFor="location">Lokasi (Opsional)</Label>
+              <Input
+                id="location"
+                value={formData.location}
+                onChange={(e) =>
+                  setFormData({ ...formData, location: e.target.value })
+                }
+                disabled={isLoading}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label>
+                  Tanggal & Waktu Mulai <span className="text-red-500">*</span>
+                </Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       type="button"
                       variant="default"
                       size="lg"
+                      className="w-full justify-start"
                       disabled={isLoading}
                     >
-                      {startDate ? format(startDate, "PPP", {locale: idLocale}) : "Pilih Tanggal"}
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {startDate ? format(startDate, "dd/MM/yyyy", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
@@ -184,21 +228,21 @@ export function EditJadwalDialog({
                   disabled={isLoading}
                 />
               </div>
-            </div>
-            <div className="grid gap-2">
-              <Label>
-                Tanggal & Waktu Selesai <span className="text-red-500">*</span>
-              </Label>
-              <div className="flex gap-2">
+              <div className="grid gap-2">
+                <Label>
+                  Tanggal & Waktu Selesai <span className="text-red-500">*</span>
+                </Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       type="button"
                       variant="default"
                       size="lg"
+                      className="w-full justify-start"
                       disabled={isLoading}
                     >
-                      {endDate ? format(endDate, "PPP", { locale: idLocale }) : "Pilih Tanggal"}
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {endDate ? format(endDate, "dd/MM/yyyy", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
@@ -218,13 +262,44 @@ export function EditJadwalDialog({
                 />
               </div>
             </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="host">Host (Opsional)</Label>
+                <Input
+                  id="host"
+                  value={formData.host}
+                  onChange={(e) =>
+                    setFormData({ ...formData, host: e.target.value })
+                  }
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="meetingType">Tipe Pertemuan (Opsional)</Label>
+                <Select
+                  value={formData.meetingType}
+                  onValueChange={(value) =>
+                    setFormData({ ...formData, meetingType: value })
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Pilih Tipe Pertemuan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Daring (Online)">Daring (Online)</SelectItem>
+                    <SelectItem value="Luring (Offline)">Luring (Offline)</SelectItem>
+                    <SelectItem value="Hybrid">Hybrid</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
             <div className="grid gap-2">
-              <Label htmlFor="location">Lokasi (Opsional)</Label>
+              <Label htmlFor="meetingLink">Link Pertemuan (Opsional)</Label>
               <Input
-                id="location"
-                value={formData.location}
+                id="meetingLink"
+                value={formData.meetingLink}
                 onChange={(e) =>
-                  setFormData({ ...formData, location: e.target.value })
+                  setFormData({ ...formData, meetingLink: e.target.value })
                 }
                 disabled={isLoading}
               />

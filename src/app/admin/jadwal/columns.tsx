@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { EditJadwalDialog } from "./edit-jadwal-dialog";
 import { DeleteJadwalDialog } from "./delete-jadwal-dialog";
+import { Button } from "@/components/ui/button";
 
 
 export type Jadwal = {
@@ -12,6 +13,9 @@ export type Jadwal = {
     eventStart: Date;
     eventEnd: Date;
     location: string | null;
+    host: string | null;
+    meetingType: string | null;
+    meetingLink: string | null;
     createdAt: Date;
 };
 
@@ -27,6 +31,11 @@ export const columns: ColumnDef<Jadwal>[] = [
     {
         accessorKey: "title",
         header: "Nama Acara",
+        cell: ({ row }) => {
+            const title = row.getValue("title") as string;
+            const truncatedTitle = title.length > 50 ? title.substring(0, 50) + "..." : title;
+            return <span>{truncatedTitle}</span>;
+        }
     },
     {
         accessorKey: "eventStart",
@@ -83,6 +92,44 @@ export const columns: ColumnDef<Jadwal>[] = [
         },
     },
     {
+        accessorKey: "host",
+        header: "Host",
+        cell: ({ row }) => {
+            const host = row.getValue("host") as string | null;
+            return host ? (
+                <span>{host}</span>
+            ) : (
+                <span className="text-sm text-gray-400 italic">-</span>
+            );
+        },
+    },
+    {
+        accessorKey: "meetingType",
+        header: "Tipe Pertemuan",
+        cell: ({ row }) => {
+            const meetingType = row.getValue("meetingType") as string | null;
+            return meetingType ? (
+                <span>{meetingType}</span>
+            ) : (
+                <span className="text-sm text-gray-400 italic">-</span>
+            );
+        },
+    },
+    {
+        accessorKey: "meetingLink",
+        header: "Link Pertemuan",
+        cell: ({ row }) => {
+            const meetingLink = row.getValue("meetingLink") as string | null;
+            return meetingLink ? (
+               <Button variant="link" className="p-0" onClick={() => window.open(meetingLink, "_blank")}>
+                Buka Link
+               </Button>
+            ) : (
+                <span className="text-sm text-gray-400 italic">-</span>
+            );
+        }
+    },
+    {
         id: "actions",
         header: "Aksi",
         cell: ({ row }) => {
@@ -97,6 +144,9 @@ export const columns: ColumnDef<Jadwal>[] = [
                     eventStart={row.original.eventStart}
                     eventEnd={row.original.eventEnd}
                     location={row.original.location}
+                    host={row.original.host}
+                    meetingType={row.original.meetingType}
+                    meetingLink={row.original.meetingLink}
                 />
                 <DeleteJadwalDialog 
                     id={jadwalId} 

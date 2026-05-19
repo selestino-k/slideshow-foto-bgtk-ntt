@@ -38,9 +38,12 @@ export type ScheduleMinAggregateOutputType = {
   id: number | null
   title: string | null
   description: string | null
+  host: string | null
   eventStart: Date | null
   eventEnd: Date | null
   location: string | null
+  meetingType: string | null
+  meetingLink: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -49,9 +52,12 @@ export type ScheduleMaxAggregateOutputType = {
   id: number | null
   title: string | null
   description: string | null
+  host: string | null
   eventStart: Date | null
   eventEnd: Date | null
   location: string | null
+  meetingType: string | null
+  meetingLink: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,9 +66,12 @@ export type ScheduleCountAggregateOutputType = {
   id: number
   title: number
   description: number
+  host: number
   eventStart: number
   eventEnd: number
   location: number
+  meetingType: number
+  meetingLink: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -81,9 +90,12 @@ export type ScheduleMinAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  host?: true
   eventStart?: true
   eventEnd?: true
   location?: true
+  meetingType?: true
+  meetingLink?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -92,9 +104,12 @@ export type ScheduleMaxAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  host?: true
   eventStart?: true
   eventEnd?: true
   location?: true
+  meetingType?: true
+  meetingLink?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -103,9 +118,12 @@ export type ScheduleCountAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  host?: true
   eventStart?: true
   eventEnd?: true
   location?: true
+  meetingType?: true
+  meetingLink?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -201,9 +219,12 @@ export type ScheduleGroupByOutputType = {
   id: number
   title: string
   description: string | null
+  host: string | null
   eventStart: Date
   eventEnd: Date
   location: string | null
+  meetingType: string | null
+  meetingLink: string | null
   createdAt: Date
   updatedAt: Date
   _count: ScheduleCountAggregateOutputType | null
@@ -235,9 +256,12 @@ export type ScheduleWhereInput = {
   id?: Prisma.IntFilter<"Schedule"> | number
   title?: Prisma.StringFilter<"Schedule"> | string
   description?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  host?: Prisma.StringNullableFilter<"Schedule"> | string | null
   eventStart?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   eventEnd?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   location?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  meetingType?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  meetingLink?: Prisma.StringNullableFilter<"Schedule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Schedule"> | Date | string
 }
@@ -246,9 +270,12 @@ export type ScheduleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  host?: Prisma.SortOrderInput | Prisma.SortOrder
   eventStart?: Prisma.SortOrder
   eventEnd?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
+  meetingType?: Prisma.SortOrderInput | Prisma.SortOrder
+  meetingLink?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -260,9 +287,12 @@ export type ScheduleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ScheduleWhereInput | Prisma.ScheduleWhereInput[]
   title?: Prisma.StringFilter<"Schedule"> | string
   description?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  host?: Prisma.StringNullableFilter<"Schedule"> | string | null
   eventStart?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   eventEnd?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   location?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  meetingType?: Prisma.StringNullableFilter<"Schedule"> | string | null
+  meetingLink?: Prisma.StringNullableFilter<"Schedule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Schedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Schedule"> | Date | string
 }, "id">
@@ -271,9 +301,12 @@ export type ScheduleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  host?: Prisma.SortOrderInput | Prisma.SortOrder
   eventStart?: Prisma.SortOrder
   eventEnd?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
+  meetingType?: Prisma.SortOrderInput | Prisma.SortOrder
+  meetingLink?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ScheduleCountOrderByAggregateInput
@@ -290,9 +323,12 @@ export type ScheduleScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Schedule"> | number
   title?: Prisma.StringWithAggregatesFilter<"Schedule"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Schedule"> | string | null
+  host?: Prisma.StringNullableWithAggregatesFilter<"Schedule"> | string | null
   eventStart?: Prisma.DateTimeWithAggregatesFilter<"Schedule"> | Date | string
   eventEnd?: Prisma.DateTimeWithAggregatesFilter<"Schedule"> | Date | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Schedule"> | string | null
+  meetingType?: Prisma.StringNullableWithAggregatesFilter<"Schedule"> | string | null
+  meetingLink?: Prisma.StringNullableWithAggregatesFilter<"Schedule"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Schedule"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Schedule"> | Date | string
 }
@@ -300,9 +336,12 @@ export type ScheduleScalarWhereWithAggregatesInput = {
 export type ScheduleCreateInput = {
   title: string
   description?: string | null
+  host?: string | null
   eventStart: Date | string
   eventEnd: Date | string
   location?: string | null
+  meetingType?: string | null
+  meetingLink?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -311,9 +350,12 @@ export type ScheduleUncheckedCreateInput = {
   id?: number
   title: string
   description?: string | null
+  host?: string | null
   eventStart: Date | string
   eventEnd: Date | string
   location?: string | null
+  meetingType?: string | null
+  meetingLink?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -321,9 +363,12 @@ export type ScheduleUncheckedCreateInput = {
 export type ScheduleUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  host?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eventStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -332,9 +377,12 @@ export type ScheduleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  host?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eventStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -343,9 +391,12 @@ export type ScheduleCreateManyInput = {
   id?: number
   title: string
   description?: string | null
+  host?: string | null
   eventStart: Date | string
   eventEnd: Date | string
   location?: string | null
+  meetingType?: string | null
+  meetingLink?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -353,9 +404,12 @@ export type ScheduleCreateManyInput = {
 export type ScheduleUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  host?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eventStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,9 +418,12 @@ export type ScheduleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  host?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   eventStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventEnd?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meetingLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -375,9 +432,12 @@ export type ScheduleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  host?: Prisma.SortOrder
   eventStart?: Prisma.SortOrder
   eventEnd?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  meetingType?: Prisma.SortOrder
+  meetingLink?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -390,9 +450,12 @@ export type ScheduleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  host?: Prisma.SortOrder
   eventStart?: Prisma.SortOrder
   eventEnd?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  meetingType?: Prisma.SortOrder
+  meetingLink?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -401,9 +464,12 @@ export type ScheduleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  host?: Prisma.SortOrder
   eventStart?: Prisma.SortOrder
   eventEnd?: Prisma.SortOrder
   location?: Prisma.SortOrder
+  meetingType?: Prisma.SortOrder
+  meetingLink?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -418,9 +484,12 @@ export type ScheduleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   title?: boolean
   description?: boolean
+  host?: boolean
   eventStart?: boolean
   eventEnd?: boolean
   location?: boolean
+  meetingType?: boolean
+  meetingLink?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["schedule"]>
@@ -429,9 +498,12 @@ export type ScheduleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   title?: boolean
   description?: boolean
+  host?: boolean
   eventStart?: boolean
   eventEnd?: boolean
   location?: boolean
+  meetingType?: boolean
+  meetingLink?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["schedule"]>
@@ -440,9 +512,12 @@ export type ScheduleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   title?: boolean
   description?: boolean
+  host?: boolean
   eventStart?: boolean
   eventEnd?: boolean
   location?: boolean
+  meetingType?: boolean
+  meetingLink?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["schedule"]>
@@ -451,14 +526,17 @@ export type ScheduleSelectScalar = {
   id?: boolean
   title?: boolean
   description?: boolean
+  host?: boolean
   eventStart?: boolean
   eventEnd?: boolean
   location?: boolean
+  meetingType?: boolean
+  meetingLink?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "eventStart" | "eventEnd" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
+export type ScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "host" | "eventStart" | "eventEnd" | "location" | "meetingType" | "meetingLink" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
 
 export type $SchedulePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Schedule"
@@ -467,9 +545,12 @@ export type $SchedulePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: number
     title: string
     description: string | null
+    host: string | null
     eventStart: Date
     eventEnd: Date
     location: string | null
+    meetingType: string | null
+    meetingLink: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["schedule"]>
@@ -898,9 +979,12 @@ export interface ScheduleFieldRefs {
   readonly id: Prisma.FieldRef<"Schedule", 'Int'>
   readonly title: Prisma.FieldRef<"Schedule", 'String'>
   readonly description: Prisma.FieldRef<"Schedule", 'String'>
+  readonly host: Prisma.FieldRef<"Schedule", 'String'>
   readonly eventStart: Prisma.FieldRef<"Schedule", 'DateTime'>
   readonly eventEnd: Prisma.FieldRef<"Schedule", 'DateTime'>
   readonly location: Prisma.FieldRef<"Schedule", 'String'>
+  readonly meetingType: Prisma.FieldRef<"Schedule", 'String'>
+  readonly meetingLink: Prisma.FieldRef<"Schedule", 'String'>
   readonly createdAt: Prisma.FieldRef<"Schedule", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Schedule", 'DateTime'>
 }

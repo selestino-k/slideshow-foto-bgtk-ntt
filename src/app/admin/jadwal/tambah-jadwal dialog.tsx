@@ -26,6 +26,7 @@ import { createSchedule } from "@/lib/actions/schedule-actions"
 import { format } from "date-fns"
 import { id as idLocale }  from "date-fns/locale"
 import { useRouter } from "next/navigation"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export function TambahJadwalDialog() {
   const { toast } = useToast()
@@ -40,6 +41,9 @@ export function TambahJadwalDialog() {
     title: "",
     description: "",
     location: "",
+    meetingType: "",
+    host: "",
+    meetingLink: "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -72,6 +76,9 @@ export function TambahJadwalDialog() {
         description: formData.description || undefined,
         eventStart,
         eventEnd,
+        host: formData.host || undefined,
+        meetingType: formData.meetingType || undefined,
+        meetingLink: formData.meetingLink || undefined,
         location: formData.location || undefined,
       })
 
@@ -88,6 +95,9 @@ export function TambahJadwalDialog() {
         title: "",
         description: "",
         location: "",
+        meetingType: "",
+        host: "",
+        meetingLink: "",
       })
       setStartDate(undefined)
       setEndDate(undefined)
@@ -112,7 +122,7 @@ export function TambahJadwalDialog() {
           Tambah Jadwal Baru
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-131.25">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Tambah Jadwal Baru</DialogTitle>
@@ -131,7 +141,6 @@ export function TambahJadwalDialog() {
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
-
                 disabled={isLoading}
               />
             </div>
@@ -143,25 +152,37 @@ export function TambahJadwalDialog() {
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                rows={3}
+                rows={2}
                 disabled={isLoading}
               />
             </div>
             <div className="grid gap-2">
-              <Label>
-                Tanggal & Waktu Mulai <span className="text-red-500">*</span>
-              </Label>
-              <div className="flex gap-2">
+                <Label htmlFor="location">Lokasi (Opsional)</Label>
+                <Input
+                  id="location"
+                  value={formData.location}
+                  onChange={(e) =>
+                    setFormData({ ...formData, location: e.target.value })
+                  }
+                  disabled={isLoading}
+                />
+              </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label>
+                  Tanggal & Waktu Mulai <span className="text-red-500">*</span>
+                </Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       type="button"
                       variant="default"
                       size="lg"
+                      className="w-full justify-start"
                       disabled={isLoading}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {startDate ? format(startDate, "PPP", { locale: idLocale }) : "Pilih Tanggal"}
+                      {startDate ? format(startDate, "dd/MM/yyyy", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
@@ -181,22 +202,21 @@ export function TambahJadwalDialog() {
                   disabled={isLoading}
                 />
               </div>
-            </div>
-            <div className="grid gap-2">
-              <Label>
-                Tanggal & Waktu Selesai <span className="text-red-500">*</span>
-              </Label>
-              <div className="flex gap-2">
+              <div className="grid gap-2">
+                <Label>
+                  Tanggal & Waktu Selesai <span className="text-red-500">*</span>
+                </Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       type="button"
                       variant="default"
                       size="lg"
+                      className="w-full justify-start"
                       disabled={isLoading}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {endDate ? format(endDate, "PPP", { locale: idLocale }) : "Pilih Tanggal"}
+                      {endDate ? format(endDate, "dd/MM/yyyy", { locale: idLocale }) : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent>
@@ -217,17 +237,48 @@ export function TambahJadwalDialog() {
                 />
               </div>
             </div>
-            <div className="grid gap-2">
-              <Label htmlFor="location">Lokasi (Opsional)</Label>
-              <Input
-                id="location"
-                value={formData.location}
-                onChange={(e) =>
-                  setFormData({ ...formData, location: e.target.value })
-                }
-                disabled={isLoading}
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="host">Host (Opsional)</Label>
+                <Input
+                  id="host"
+                  value={formData.host}
+                  onChange={(e) =>
+                    setFormData({ ...formData, host: e.target.value })
+                  }
+                  disabled={isLoading}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="meetingType">Tipe Pertemuan (Opsional)</Label>
+                <Select
+                  value={formData.meetingType}
+                  onValueChange={(value) =>
+                    setFormData({ ...formData, meetingType: value })
+                  }
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Pilih Tipe Pertemuan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Daring (Online)">Daring (Online)</SelectItem>
+                    <SelectItem value="Luring (Offline)">Luring (Offline)</SelectItem>
+                    <SelectItem value="Hybrid">Hybrid</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
+              <div className="grid gap-2">
+                <Label htmlFor="meetingLink">Link Pertemuan (Opsional)</Label>
+                <Input
+                  id="meetingLink"
+                  value={formData.meetingLink}
+                  onChange={(e) =>
+                    setFormData({ ...formData, meetingLink: e.target.value })
+                  }
+                  disabled={isLoading}
+                />
+              </div>
           </div>
           <DialogFooter>
             <Button

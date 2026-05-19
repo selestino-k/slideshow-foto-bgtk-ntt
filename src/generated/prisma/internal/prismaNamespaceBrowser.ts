@@ -102,9 +102,12 @@ export const ScheduleScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  host: 'host',
   eventStart: 'eventStart',
   eventEnd: 'eventEnd',
   location: 'location',
+  meetingType: 'meetingType',
+  meetingLink: 'meetingLink',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
