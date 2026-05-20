@@ -15,7 +15,7 @@ import { ImageUploader } from "@/components/admin/image-uploader"
 import { ArrowLeft, Save, Loader2, Link2, Image as ImageIcon, AlertCircle, CalendarIcon } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { format, parseISO } from "date-fns"
+import { format, parseISO, isValid } from "date-fns"
 import { id } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 import { CircleLoader } from "@/components/circle-loader"
@@ -69,7 +69,10 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
         })
 
         if (photo.timelineDate) {
-          setDate(parseISO(photo.timelineDate))
+          const parsed = parseISO(photo.timelineDate)
+          if (isValid(parsed)) {
+            setDate(parsed)
+          }
         }
 
         // Check if it's an external URL
@@ -223,7 +226,7 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
   }
 
   return (
-    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-montserrat">
       <main className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
         <div className="flex items-center gap-4">
           <Button variant="outline" size="icon" asChild>
@@ -387,7 +390,7 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
 
                     {imageError && (
                       <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-md">
-                        <AlertCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+                        <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
                         <p className="text-sm text-red-700">URL gambar tidak valid atau tidak dapat diakses</p>
                       </div>
                     )}
@@ -422,7 +425,7 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
                 <Button
                   type="submit"
                   disabled={isSubmitting || isValidating || (!formData.imageFile && !formData.imageUrl && !externalUrl) || (useExternalUrl && imageError)}
-                  className="min-w-[150px]"
+                  className="min-w-37.5"
                 >
                   {isSubmitting ? (
                     <>

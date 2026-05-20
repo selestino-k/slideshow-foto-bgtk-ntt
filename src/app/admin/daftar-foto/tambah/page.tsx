@@ -162,7 +162,7 @@ export default function AddPhotoPage() {
   }
 
   return (
-    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-montserrat">
       <main className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
         <div className="flex items-center gap-4">
           <Button variant="outline" size="icon" asChild>
@@ -324,7 +324,7 @@ export default function AddPhotoPage() {
 
                     {imageError && (
                       <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-md">
-                        <AlertCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+                        <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
                         <p className="text-sm text-red-700">URL gambar tidak valid atau tidak dapat diakses</p>
                       </div>
                     )}
@@ -359,7 +359,7 @@ export default function AddPhotoPage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting || isValidating || (!formData.imageFile && !externalUrl) || (useExternalUrl && imageError)}
-                  className="min-w-[150px]"
+                  className="min-w-37.5"
                 >
                   {isSubmitting ? (
                     <>

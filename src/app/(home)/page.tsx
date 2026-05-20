@@ -43,7 +43,7 @@ export default async function Home() {
           <HomeCarousel photos={photos} />
         </div>
 
-        <div className="w-1/4 h-full overflow-y-auto bg-background border-l p-4">
+        <div className="w-1/4 h-full overflow-y-auto bg-background border-l p-4 content-center">
           <ScheduleCard schedules={schedules} />
         </div>
       </div>
