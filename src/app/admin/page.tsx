@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
-import { CalendarTimeline } from "@/src/app/(home)/jadwal/calendar-timeline";
+import { CalendarTimeline } from "@/components/calendar-timeline";
 import { getSchedules } from "@/lib/actions/schedule-actions";
 import { TambahJadwalDialog } from "./jadwal/tambah-jadwal dialog";
 
@@ -40,7 +40,7 @@ export default async function AdminPage() {
     const schedules = await getSchedules();
 
     return (
-        <div className="items-stretch w-full min-h-screen p-8 pb-20 font-(family-name:--font-geist-sans)">
+        <div className="items-stretch w-full min-h-screen p-8 pb-20 font-montserrat">
             <main className="flex flex-col gap-3 w-full">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">

@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ModeToggle } from "@/components/dark-switch"
 import { getSchedules } from '@/lib/actions/schedule-actions'
-import { CalendarTimeline } from './calendar-timeline'
+import { CalendarTimeline } from '../../../../components/calendar-timeline'
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "./columns"
 

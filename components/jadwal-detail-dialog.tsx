@@ -33,9 +33,9 @@ export function JadwalDetailDialog({ jadwal, open, onOpenChange }: JadwalDetailD
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-lg p-0 overflow-hidden">
+            <DialogContent className="max-w-lg p-0 overflow-hidden font-montserrat">
                 {/* Header */}
-                <DialogHeader className="bg-primary text-primary-foreground px-6 py-5">
+                <DialogHeader className="bg-event text-primary-foreground px-6 py-5">
                     <DialogTitle className="text-2xl font-bold leading-snug">
                         {jadwal.title}
                     </DialogTitle>
@@ -43,11 +43,12 @@ export function JadwalDetailDialog({ jadwal, open, onOpenChange }: JadwalDetailD
 
                 <div className="px-6 py-5 space-y-5">
                     {/* Description */}
+                    <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Deskripsi</p>
+                    </div>
                     {jadwal.description && (
-                        <div className="space-y-1">
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Deskripsi</p>
-                            <p className="text-foreground leading-relaxed text-sm">{jadwal.description}</p>
-                        </div>
+                        <p className="text-foreground leading-relaxed text-sm">{jadwal.description}</p>
+
                     )}
 
                     <Separator />
@@ -55,14 +56,14 @@ export function JadwalDetailDialog({ jadwal, open, onOpenChange }: JadwalDetailD
                     {/* Event Details */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Tanggal Mulai</p>
-                            <Badge variant="outline" className="text-sm font-normal border-primary text-primary">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Waktu Mulai</p>
+                            <Badge variant="outline" className="text-sm font-medium border-foreground text-foreground">
                                 {new Date(jadwal.eventStart).toLocaleString("id-ID")}
                             </Badge>
                         </div>
                         <div className="space-y-1">
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Tanggal Selesai</p>
-                            <Badge variant="outline" className="text-sm font-normal border-primary text-primary">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Waktu Selesai</p>
+                            <Badge variant="outline" className="text-sm font-medium border-foreground text-foreground">
                                 {new Date(jadwal.eventEnd).toLocaleString("id-ID")}
                             </Badge>
                         </div>

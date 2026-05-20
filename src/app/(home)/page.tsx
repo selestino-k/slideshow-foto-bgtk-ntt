@@ -1,10 +1,10 @@
 import MenuCard from "@/components/menu-card"
-import { HomeCarousel } from "./home-carousel"
+import { HomeCarousel } from "../../../components/home-carousel"
 import prisma from "@/lib/prisma"
-import "./zoom.css"
 import Image from "next/image"
 import { ModeToggle } from "@/components/dark-switch"
-import {toast} from "sonner"
+import { getSchedules } from "@/lib/actions/schedule-actions"
+import { ScheduleCard } from "../../../components/schedule-card"
 
 async function getCarouselPhotos() {
   try {
@@ -16,18 +16,20 @@ async function getCarouselPhotos() {
     })
     return photos
   } catch  {
-    toast.error('Gagal memuat foto untuk carousel.');
     return []
   }
 }
 
 export default async function Home() {
-  const photos = await getCarouselPhotos()
+  const [photos, schedules] = await Promise.all([
+    getCarouselPhotos(),
+    getSchedules(),
+  ])
 
   return (
-    <div className="grid w-full justify-items-center min-h-dvh overflow-hidden">
+    <div className="grid w-full justify-items-center min-h-dvh overflow-hidden font-montserrat">
 
-      <div id="home" className="relative z-10 flex justify-center h-screen w-screen">
+      <div id="home" className="relative z-10 flex h-screen w-screen">
         <Image
           src="/images/logo/logo-admin-bgtk-ntt.png"
           alt="Logo BGTK NTT"
@@ -36,13 +38,18 @@ export default async function Home() {
           className="absolute top-6 left-6 z-20 object-contain"
           priority
         />
-        <main className="z-10 w-full content-around">
+
+        <div className="w-3/4 h-full">
           <HomeCarousel photos={photos} />
-        </main>
+        </div>
+
+        <div className="w-1/4 h-full overflow-y-auto bg-background border-l p-4">
+          <ScheduleCard schedules={schedules} />
+        </div>
       </div>
 
 
-      <div className="mt-10 w-full mx-10 pl-10 font-geist text-primary dark:text-white-700">
+      <div className="mt-10 w-full mx-10 pl-10 text-primary dark:text-white-700">
         <div className="flex flex-row items-start">
           <div className=" items-center space-x-4">
             <h1 className="text-4xl font-bold mb-4">Menu</h1>

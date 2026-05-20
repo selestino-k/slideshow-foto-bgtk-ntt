@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 
-
 export const metadata: Metadata = {
   title: "Slideshow Foto BGTK Provinsi NTT",
   keywords: ["Balai GTK NTT", "Balai GTK Provinsi NTT", "BGTK NTT", "Balai Guru dan Tenaga Kependidikan NTT"],
@@ -11,17 +10,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  // Add custom properties as needed
-  // minimumScale: 1,
-  // maximumScale: 1,
-  // viewportFit: 'cover', 
 };
 export default async function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
 
   return (
     <main className="gap-3 w-full scroll-smooth">
@@ -30,6 +24,5 @@ export default async function HomeLayout({
         <Toaster position="bottom-center" />
       </div>
     </main>
-
   );
 }

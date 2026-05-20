@@ -26,7 +26,7 @@ export default function MenuCard({ iconName, title, description, href, target }:
         <Link href={href} target={target}>
         <div className="flex items-center gap-4">
           <Icon className="w-8 h-8 text-primary" />
-          <CardTitle className="text-xl">{title}</CardTitle>
+          <CardTitle className="text-xl font-bold">{title}</CardTitle>
         </div>
         <CardDescription className="mt-2">{description}</CardDescription>
         </Link>

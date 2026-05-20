@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
 import { EditJadwalDialog } from "./edit-jadwal-dialog";
 import { DeleteJadwalDialog } from "./delete-jadwal-dialog";
-import { JadwalDetailDialog } from "../../(home)/jadwal/jadwal-detail-dialog";
+import { JadwalDetailDialog } from "../../../../components/jadwal-detail-dialog";
 import { Button } from "@/components/ui/button";
 
 
@@ -24,7 +24,7 @@ export type Jadwal = {
 export const columns: ColumnDef<Jadwal>[] = [
     {
         accessorKey: "id",
-        header: "ID",
+        header: "No",
         cell: ({ row }) => {
             const id = row.index + 1;
             return <span className="text-xs font-mono">{id}</span>;

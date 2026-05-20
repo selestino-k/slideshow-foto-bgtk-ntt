@@ -67,7 +67,7 @@ export function FotoDataTable<TData, TValue>({
             <div className="flex items-center gap-2">
                 <Search className="h-4 w-4 text-gray-500" />
                 <Input
-                    placeholder="Cari postingan..."
+                    placeholder="Cari foto slideshow..."
                     value={filtering}
                     onChange={(e) => setFiltering(e.target.value)}
                     className="max-w-sm"

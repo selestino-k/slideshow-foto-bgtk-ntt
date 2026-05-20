@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { JadwalDetailDialog, type JadwalDetail } from "./jadwal-detail-dialog";
+import { JadwalDetailDialog, type JadwalDetail } from "../../../../components/jadwal-detail-dialog";
 
 export type JadwalHome = JadwalDetail;
 

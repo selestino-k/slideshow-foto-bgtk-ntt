@@ -21,9 +21,9 @@ export type Foto = {
 export const columns: ColumnDef<Foto>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: "No",
     cell: ({ row }) => {
-      const id = row.original.id.toString()
+      const id = row.index + 1  
       return <span className="text-xs font-mono">{id}</span>
     },
   },

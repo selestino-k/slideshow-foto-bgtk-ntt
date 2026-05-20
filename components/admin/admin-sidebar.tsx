@@ -1,4 +1,3 @@
-import {  ChartPie, User, ImagePlay, List, Calendar } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -7,44 +6,14 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { DropdownMenu } from "@/components/ui/dropdown-menu"
 import { SidebarUser } from "./sidebar-user"
+import { SidebarNav } from "./sidebar-nav"
 import Image from "next/image"
 import Link from "next/link"
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
-
-const items = [
-    {
-        title: "Dashboard",
-        url: "/admin",
-        icon: ChartPie,
-    },
-    {
-        title: "Daftar Foto",
-        url: "/admin/daftar-foto",
-        icon: List,
-    },
-    {
-        title: "Galeri Foto",
-        url: "/admin/galeri-foto",
-        icon: ImagePlay,
-    },
-    {
-        title: "Jadwal Kegiatan",
-        url: "/admin/jadwal",
-        icon: Calendar,
-    },
-    {
-        title: "Pengguna",
-        url: "/admin/user",
-        icon: User,
-    },
-]
 
 // Sidebar component with explicit background styling
 export async function AdminAppSidebar() {
@@ -56,7 +25,7 @@ export async function AdminAppSidebar() {
     }
 
     return (
-        <Sidebar side="left" className="bg-primary dark:bg-gray-950 text-white dark:text-white-700 border-r shadow-sm transition-all duration-300 ease-in-out">
+        <Sidebar side="left" className="bg-primary dark:bg-gray-950 text-white dark:text-white-700 border-r shadow-sm transition-all duration-300 ease-in-out font-montserrat">
             <SidebarHeader className="bg-primary dark:bg-gray-950">
                 <div className="pl-2 py-2">
                 <Link href="/" className="flex items-center gap-2" prefetch={false}>
@@ -70,20 +39,8 @@ export async function AdminAppSidebar() {
                     <SidebarGroupContent>
                         <DropdownMenu>
                         </DropdownMenu>
-                        <SidebarGroupLabel className="text-base items-center text-white dark:text-white-700 mb-5">PANEL ADMIN SLIDESHOW</SidebarGroupLabel>
-                        <SidebarMenu className="space-y-3 font-semibold font-geist">
-                            {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url} className="flex items-center gap-3 px-3 py-2 rounded-md
-                                             hover:bg-primary-70 h-12 pl-8 dark:hover:bg-primary-700 transition-colors">
-                                            <item.icon className="h-8 w-8" />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
+                        <SidebarGroupLabel className="text-md mb-3 text-white">PANEL ADMIN SLIDESHOW</SidebarGroupLabel>
+                        <SidebarNav />
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>

@@ -7,6 +7,7 @@ import { Clock, MapPin, Presentation, Timer } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { JadwalDetailDialog, type JadwalDetail } from './jadwal-detail-dialog'
+import { DigitalClock } from './digital-clock'
 
 type Schedule = JadwalDetail & { updatedAt: Date }
 
@@ -97,10 +98,13 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
 
   return (
     <>
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
       {/* Calendar Section */}
       <Card className="lg:col-span-1 items-center">
         <CardContent className="space-y-4 items-center">
+          
+          <DigitalClock className="w-full justify-center text-lg" />
           <Calendar
             mode="single"
             selected={selectedDate}
@@ -154,7 +158,7 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
 
                     {/* Schedule Card */}
                     <div
-                      className="rounded-lg hover:bg-muted transition-colors cursor-pointer mx-2 p-4"
+                      className="rounded-lg hover:bg-muted transition-colors cursor-pointer mx-2 p-2 py-0"
                       onClick={() => { setDialogJadwal(schedule); setDialogOpen(true); }}
                     >
                       <div className="flex items-start justify-between gap-4">

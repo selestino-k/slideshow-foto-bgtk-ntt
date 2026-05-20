@@ -11,7 +11,7 @@ import {
     type CarouselApi,
 } from "@/components/ui/carousel"
 import { Calendar, MapPin } from "lucide-react"
-import "./zoom.css"
+
 
 interface Photo {
     id: number
@@ -28,6 +28,14 @@ interface HomeCarouselProps {
 }
 
 export function HomeCarousel({ photos }: HomeCarouselProps) {
+    if (photos.length === 0) {
+        return (
+            <div className="w-full h-screen bg-black flex flex-col items-center justify-center gap-4">
+                <p className="text-white/50 text-2xl font-semibold">Belum ada foto tersedia</p>
+            </div>
+        )
+    }
+
     const Plugin = React.useRef([
         Autoplay({ delay: 8000, stopOnInteraction: false }),
     ])
