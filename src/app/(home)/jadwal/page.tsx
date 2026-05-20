@@ -20,7 +20,7 @@ export default async function JadwalPage() {
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-2xl font-bold text-primary font-geist">
+          <h1 className="text-2xl font-bold text-primary font-montserrat">
             Jadwal Kegiatan
           </h1>
         </div>
@@ -30,10 +30,11 @@ export default async function JadwalPage() {
       </header>
 
       {/* Calendar Content */}
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-6 font-montserrat">
         <CalendarTimeline schedules={schedules} />
-        <div className="mt-5" />
+        <div className="mt-5 font-inter">
         <DataTable columns={columns} data={schedules} />
+        </div>
       </main>
 
     </div>
