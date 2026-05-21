@@ -34,10 +34,10 @@ export default async function UsersPage() {
   }
 
   return (
-    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="items-stretch w-full min-h-screen p-8 pb-20 font-montserrat">
       <main className="flex flex-col gap-3 w-full">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl/7 font-semibold sm:truncate sm:text-5xl sm:tracking-tight text-primary">
+          <h2 className="text-5xl font-semibold text-primary">
             Daftar Pengguna
           </h2>
         </div>
@@ -49,7 +49,7 @@ export default async function UsersPage() {
             </Link>
           </Button>
         </div>
-        <div className="mt-6 w-full">
+        <div className="mt-6 w-full font-inter">
           {userData.length === 0 ? (
             <div className="text-center py-10 text-gray-500">
               Tidak ada pengguna yang tersedia.
