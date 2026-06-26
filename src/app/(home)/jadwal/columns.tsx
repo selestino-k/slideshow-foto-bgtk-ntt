@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { JadwalDetailDialog, type JadwalDetail } from "../../../../components/jadwal-detail-dialog";
+import { toSafeDate } from "@/lib/date-utils";
 
 export type JadwalHome = JadwalDetail;
 
@@ -43,7 +44,10 @@ export const columns: ColumnDef<JadwalHome>[] = [
         accessorKey: "eventStart",
         header: "Tanggal Mulai",
         cell: ({ row }) => {
-            const eventStart = new Date(row.original.eventStart);
+            const eventStart = toSafeDate(row.original.eventStart);
+            if (!eventStart) {
+                return <span className="text-sm text-gray-400 italic">Tidak ada data</span>;
+            }
             return (
                 <span>
                     {eventStart.toLocaleDateString("id-ID", {
@@ -64,7 +68,10 @@ export const columns: ColumnDef<JadwalHome>[] = [
         accessorKey: "eventEnd",
         header: "Tanggal Selesai",
         cell: ({ row }) => {
-            const eventEnd = new Date(row.original.eventEnd);
+            const eventEnd = toSafeDate(row.original.eventEnd);
+            if (!eventEnd) {
+                return <span className="text-sm text-gray-400 italic">Tidak ada data</span>;
+            }
             return (
                 <span>
                     {eventEnd.toLocaleDateString("id-ID", {

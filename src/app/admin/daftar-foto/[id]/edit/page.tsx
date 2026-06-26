@@ -18,7 +18,6 @@ import Image from "next/image"
 import { format, parseISO, isValid } from "date-fns"
 import { id } from "date-fns/locale"
 import { cn } from "@/lib/utils"
-import { CircleLoader } from "@/components/circle-loader"
 import { use } from "react"
 
 interface EditPhotoPageProps {
@@ -31,7 +30,6 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
   const resolvedParams = use(params)
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const [useExternalUrl, setUseExternalUrl] = useState(false)
   const [externalUrl, setExternalUrl] = useState("")
   const [imageError, setImageError] = useState(false)
@@ -81,9 +79,7 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
           setExternalUrl(photo.imageUrl)
         }
 
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching photo:", error)
+      } catch {
         toast.error("Gagal memuat data foto")
         router.push("/admin/daftar-foto")
       }
@@ -134,8 +130,7 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
       toast.success("URL gambar valid")
       setIsValidating(false)
       return true
-    } catch (error) {
-      console.error("Error validating image URL:", error)
+    } catch {
       setImageError(true)
       toast.error("Tidak dapat memvalidasi URL. Pastikan URL dapat diakses secara publik")
       setIsValidating(false)
@@ -209,20 +204,11 @@ export default function EditPhotoPage({ params }: EditPhotoPageProps) {
       toast.success("Foto berhasil diperbarui")
       router.push("/admin/daftar-foto")
       router.refresh()
-    } catch (error) {
-      console.error("Error updating photo:", error)
-      toast.error(error instanceof Error ? error.message : "Gagal memperbarui foto")
+    } catch  {
+      toast.error("Gagal memperbarui foto")
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <CircleLoader size="xl" />
-      </div>
-    )
   }
 
   return (

@@ -6,7 +6,7 @@ export async function getSchedules() {
   try {
     const schedules = await prisma.schedule.findMany({
         orderBy: {
-        eventStart: "asc",
+        eventStart: "desc",
       },
     });
     return schedules;

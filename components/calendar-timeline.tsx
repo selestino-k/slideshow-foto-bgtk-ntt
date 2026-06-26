@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Clock, MapPin, Presentation, Timer } from 'lucide-react'
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { JadwalDetailDialog, type JadwalDetail } from './jadwal-detail-dialog'
 import { DigitalClock } from './digital-clock'
+import { toSafeDate } from '@/lib/date-utils'
 
-type Schedule = JadwalDetail & { updatedAt: Date }
+type Schedule = JadwalDetail & { updatedAt: Date | string }
 
 interface CalendarTimelineProps {
   schedules: Schedule[]
@@ -22,12 +23,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
 
   // Get schedules for selected date (including multi-day events)
   const selectedSchedules = schedules.filter((schedule) => {
-    const startDate = schedule.eventStart instanceof Date 
-      ? schedule.eventStart 
-      : parseISO(String(schedule.eventStart))
-    const endDate = schedule.eventEnd instanceof Date 
-      ? schedule.eventEnd 
-      : parseISO(String(schedule.eventEnd))
+    const startDate = toSafeDate(schedule.eventStart)
+    const endDate = toSafeDate(schedule.eventEnd)
+
+    if (!startDate || !endDate) {
+      return false
+    }
     
     // Check if selectedDate falls within the event period (inclusive)
     const selectedDay = new Date(selectedDate)
@@ -44,12 +45,12 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
 
   // Get dates that have schedules for calendar highlighting
   const scheduleDates = schedules.flatMap((schedule) => {
-    const startDate = schedule.eventStart instanceof Date 
-      ? schedule.eventStart 
-      : parseISO(String(schedule.eventStart))
-    const endDate = schedule.eventEnd instanceof Date 
-      ? schedule.eventEnd 
-      : parseISO(String(schedule.eventEnd))
+    const startDate = toSafeDate(schedule.eventStart)
+    const endDate = toSafeDate(schedule.eventEnd)
+
+    if (!startDate || !endDate) {
+      return []
+    }
     
     // Generate all dates between start and end
     const dates = []
@@ -68,21 +69,24 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
   })
 
   // Format time
-  const formatTime = (date: Date) => {
-    const eventDate = date instanceof Date ? date : parseISO(String(date))
+  const formatTime = (date: Date | string) => {
+    const eventDate = toSafeDate(date)
+    if (!eventDate) return '-'
     return format(eventDate, 'HH:mm', { locale: id })
   }
 
   // Format date
-  const formatDate = (date: Date) => {
-    const eventDate = date instanceof Date ? date : parseISO(String(date))
+  const formatDate = (date: Date | string) => {
+    const eventDate = toSafeDate(date)
+    if (!eventDate) return '-'
     return format(eventDate, 'dd/MM/yyyy', { locale: id })
   }
 
   // Calculate duration
-  const calculateDuration = (start: Date, end: Date) => {
-    const startDate = start instanceof Date ? start : parseISO(String(start))
-    const endDate = end instanceof Date ? end : parseISO(String(end))
+  const calculateDuration = (start: Date | string, end: Date | string) => {
+    const startDate = toSafeDate(start)
+    const endDate = toSafeDate(end)
+    if (!startDate || !endDate) return '-'
     const diff = endDate.getTime() - startDate.getTime()
     const hours = Math.floor(diff / (1000 * 60 * 60))
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
@@ -139,8 +143,9 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
             <div className="space-y-4">
               {selectedSchedules
                 .sort((a, b) => {
-                  const dateA = a.eventStart instanceof Date ? a.eventStart : parseISO(String(a.eventStart))
-                  const dateB = b.eventStart instanceof Date ? b.eventStart : parseISO(String(b.eventStart))
+                  const dateA = toSafeDate(a.eventStart)
+                  const dateB = toSafeDate(b.eventStart)
+                  if (!dateA || !dateB) return 0
                   return dateA.getTime() - dateB.getTime()
                 })
                 .map((schedule, index) => (
@@ -150,11 +155,11 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                   >
                     {/* Timeline Line */}
                     {index !== selectedSchedules.length - 1 && (
-                      <div className="absolute left-2.75 top-6 bottom-0 w-0.5 bg-border" />
+                      <div className="absolute left-2.75 top-0 bottom-0 w-0.5 bg-border z-0" />
                     )}
 
                     {/* Timeline Dot */}
-                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-event border-4 border-background" />
+                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-event border-4 border-background z-10" />
 
                     {/* Schedule Card */}
                     <div
@@ -199,7 +204,6 @@ export function CalendarTimeline({ schedules }: CalendarTimelineProps) {
                               </div>
                           </div>
 
-                         
                         </div>
                       </div>
                     </div>
